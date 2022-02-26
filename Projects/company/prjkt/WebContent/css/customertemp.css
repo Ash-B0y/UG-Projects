@@ -1,0 +1,30 @@
+.second{
+	background-color:rgb(195, 222, 245,0.5);
+
+}
+
+
+.col{
+	border-radius:20px;
+	max-width:660px;
+	max-height:1000px;
+}
+
+
+.imgclass{
+	max-height: 150px;
+	max-widht:50px;
+}
+
+.lineleft{
+	align:left;
+	font-weight: bold;
+	
+	
+}
+
+.lineright{
+	align:right;
+	font-weight: bold;
+	
+}

@@ -1,0 +1,32 @@
+CREATE proc GetHospitalInfo          
+@Mobileno varchar(50)=null,        
+@Appointdt varchar(max)=null,        
+@doctorid bigint=null        
+as            
+begin      
+         
+select conm,coAddress,presentURL from M_Company     --logo and company details        
+        
+        
+select ds.DRSKILLID,(p.PERSONNM+'-'+ms.subdeptnm) as DoctorName,p.BRANCHID from M_Person p --(,pp.PHOTOFNAME )                     
+join M_Doctor d on d.PERSONID=p.PERSONID                   
+join DrSkill ds on ds.DRID=d.DRID                  
+join M_SubDepartment ms on ms.subdeptid=ds.SUBDEPTID  --doctors and departments   
+--join PersonPhoto pp on pp.PERSONID=p.PERSONID       
+        
+        
+if(@Appointdt is not null)        
+begin        
+declare @dt varchar(max)        
+set @dt=@Appointdt        
+ SELECT DATENAME(WEEKDAY,convert(datetime, @dt , 105))        
+select (drChg+dbf.drhospchg)as drChg,da.TIMESLOTID,w.weekdaynm from DrBranchFee dbf        
+ left join DrAvailability da on da.drchgid=dbf.drchgid        
+  left join Weekdays w on w.weekdayid=da.WEEKDAYID        
+ where dbf.drSkillid=@doctorid and w.weekdaynm=(SELECT DATENAME(WEEKDAY,convert(datetime, @dt , 105)))  --time slot and dr fees        
+         
+end        
+end        
+--else        
+--set @result=1        
+--end        

@@ -1,0 +1,45 @@
+CREATE proc MobileHosiptalInfo   --Insert Query        
+      
+@mobileno varchar(50),        
+@name nvarchar(100),        
+@genderid int,        
+@age int,        
+@doctorid bigint,        
+@appointdt varchar(max),        
+@timeslotid int,      
+--@personid bigint=null,   
+@branchid int     
+as        
+begin        
+declare @dt int       
+declare @tokenno int       
+declare @dob varchar(max)     
+declare @dob1 datetime    
+declare @appointdt1 datetime  
+declare @titleid int  
+declare @personid bigint    
+    
+set @dt=@age      
+set @dob=(SELECT DateAdd(yy, -@dt, GetDate()))    
+set @dob1=(select convert(datetime, @dob , 105))     
+select @dob1    
+set @appointdt1=(select convert(datetime, @appointdt , 105))    
+exec  @tokenno=GetTokenNo  @doctorId,1,@appointdt1,@timeSlotId  
+  
+if (@genderid=1)  
+set @titleid=1  
+else  
+if(@genderid=2)  
+set @titleid=3  
+         
+--insert into M_Person(CELLNO,PERSONNM,GENDERID,AGE,DOB,) values(@mobileno,@name,@genderid,@age,@dob1)  
+        
+  insert into M_Person(PERSONNM,HOSPITALREF,REGNDT,DOB,AGE,CELLNO,EMAILID,BRANCHID,UID,POSTDT,TITLEID, BGID,RELIGIONID,GENDERID,  
+STATUSID,VSTACTIVE,MARITALID,SPOUSENM,OCCUPATION,ANNUALINCOME,REFACTUALID,PERSONREM,coaid,aadharno,igstcustomer,secondmobileno)  
+values(@name,'',GETDATE(),@dob1,@age,@mobileno,'',@branchid,1,GETDATE(),@titleid,0,0,@genderid,1,'N',0,'','','',1,'',-1,'','N','')  
+    
+ set @personid= 'SELECT TOP 1 PERSONID FROM M_Person ORDER BY PERSONID DESC'  --partial  
+insert into DrAppointment(drappointdt,drSkillid,Personid, tokenno,uid,tokenStatusid,postdt,vsttypeid,timeslotid,booksubtypeid,vstSubTypeId,branchid)      
+values(@appointdt1,@doctorid,@personid,@tokenno,1,6,GETDATE(),1,@timeslotid,4,1,@branchid)  
+        
+end 

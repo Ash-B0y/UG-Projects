@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <IPDRDoc xmlns="http://www.ipdr.org/namespaces/ipdr"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="DOCSIS-3.1-B.0.xsd"
+ docId="C341A679-0000-0000-0000-000BBF54D000"
+ creationTime="2002-05-25T14:41:29Z"
+ IPDRRecorderInfo="CMTS01"
+ version="3.1">
+ <IPDR xsi:type="DOCSIS-Type">
+ <IPDRcreationTime>26-07-2018 02:00:34 PM</IPDRcreationTime>
+ <IPDRendTime>26-07-2018 03:00:36 PM</IPDRendTime>
+ <CMTShostname>R7519-UBR7246.cisco.com</CMTShostname>
+ <CMTSipAddress>1.8.8.21</CMTSipAddress>
+ <CMTSsysUpTime>287315    </CMTSsysUpTime>
+ <CMTScatvIfName>Cable8/0/0</CMTScatvIfName>
+ <CMTScatvIfIndex>13</CMTScatvIfIndex> 
+ <CMTSupIfName>Ca8/0/0-upstream0</CMTSupIfName> 
+ <CMTSupIfType>129</CMTSupIfType> 
+ <CMTSdownIfName>Ca8/0/0-downstream</CMTSdownIfName>
+ <CMmacAddress>CD-A6-69-AB-D4-53</CMmacAddress>
+ <CMdocsisMode>1.0</CMdocsisMode>
+ <CMipAddress>3.8.21.3</CMipAddress>
+ <CPEipAddress></CPEipAddress>
+ <RecType>1</RecType>
+ <serviceIdentifier>3</serviceIdentifier>
+ <serviceClassName></serviceClassName>
+ <serviceDirection>1</serviceDirection>
+ <serviceOctetsPassed>35310334</serviceOctetsPassed>
+ <serviceOctetsReceived>35310334</serviceOctetsReceived>
+ <servicePktsPassed>223</servicePktsPassed>
+ <serviceSlaDropPkts>2</serviceSlaDropPkts>
+ <serviceSlaDelayPkts>0</serviceSlaDelayPkts>
+ <serviceTimeCreated>11000</serviceTimeCreated> 
+ <serviceTimeActive>15890</serviceTimeActive>
+ </IPDR>
+ </IPDRDoc> 

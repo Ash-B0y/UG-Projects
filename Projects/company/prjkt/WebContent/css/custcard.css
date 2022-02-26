@@ -1,0 +1,146 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+.card-container {
+  cursor: pointer;
+  height: 300px;
+  perspective: 600;
+  position: relative;
+  width: 200px;
+}
+.card {
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  backface-visibility: hidden;
+  border-radius: 20px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.card .back {
+  background: #eaeaed;
+  color: #0087cc;
+  line-height: inherit;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+.container-fluid .first{
+	border-radius:5px;	
+}
+
+.TPad{
+	padding-top:10px;
+}
+
+.cardspace{
+	margin-left:-50px;
+	padding-top: 50px;
+}
+
+.cardimage{
+	objecd-fit:fill;
+	width:200px;
+	height:300px
+}
+
+
+
+/* .promos { */
+/*   width: 500px; */
+/*   margin: 0 auto; */
+/*   margin-top: 50px; */
+/* } */
+.promo {
+  width: 200px;
+  background: #0F1012; 
+  color: #f9f9f9;
+  float: left;
+}
+.deal {
+  padding: 10px 0 0 0;
+}
+.deal span {
+  display: block;
+  text-align: center;
+}
+.deal span:first-of-type {
+  font-size: 23px;  
+}
+.deal span:last-of-type {
+  font-size: 13px;
+}
+.promo .price {
+  display: block;
+  width: 200px;  
+  background: #292b2e;
+  margin: 15px 0 10px 0;
+  text-align: center;
+  font-size: 23px;
+  padding: 17px 0 17px 0;
+}
+.ul {
+  display: block;
+  margin: 20px 0 10px 0;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+  color: #999999;
+}
+/* .ghum{ */
+/* 	 transition: 0.70s; */
+/* } */
+/* .ghum:hover{ */
+/* 	transform : rotatez(360deg); */
+/* } */
+.li {
+  display: block;
+  margin: 10px 0 0 0;
+}
+
+.ul .li:HOVER{
+	background: none;
+	transition:none;
+	
+}
+
+div .ul .li{
+	list-style-type:none;
+	display:list-item;
+	padding: 15px;
+	border-bottom: 1px solid #399595;
+	
+}
+
+div .ul .li:HOVER {
+	background:threedlightshadow;
+	transition:linear all .30s;
+	color:red;
+	margin-left: 20px;
+	
+}
+button {
+  border: none;
+  border-radius: 40px;
+  background: #292b2e;
+  color: #f9f9f9;
+  padding: 10px 37px;
+  margin: 10px 0 20px 60px;
+}
+.scale {
+  transform: scale(1.2);
+  box-shadow: 0 0 4px 1px rgba(20, 20, 20, 0.8);
+}
+.scale button {
+  background: #64AAA4;
+}
+.scale .price {
+  color: #64AAA4;
+}
+

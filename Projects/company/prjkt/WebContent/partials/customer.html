@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="../js/shared/jquery.js"></script>
+<script src="../js/shared/bootstrap.js"></script>
+<script src="../js/shared/angular.js"></script>
+<script src="../js/shared/angular-route.js"></script>
+<script src="../js/shared/angular-cookies.js"></script>
+<script src="../js/user/Properties.js"></script>
+<script src="../js/user/Application.js"></script>
+<script src="../js/user/Controller.js"></script>
+<script type="text/javascript">
+function goBack() {
+    window.history.back();
+}</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../css/component.css" />
+<script src="../js/user/modernizr.custom.js"></script>
+<meta charset="ISO-8859-1">
+<title>Customer Page</title>
+</head>
+<body ng-app="ApplicationCustomer" ng-controller="CookieControllerCustomer" ng-init="getUserName()">
+		<div class="container">
+			<ul id="gn-menu" class="gn-menu-main">
+				<li class="gn-trigger">
+					<a class="gn-icon gn-icon-menu"><span>Menu</span></a>
+					<nav class="gn-menu-wrapper">
+						<div class="gn-scroller">
+							<ul class="gn-menu">
+							
+							
+							
+								<li><a class="gn-icon gn-icon-article" href="#/myDetails">My details</a></li>
+								
+								
+								
+								<li><a class="gn-icon gn-icon-cog" href="#/myBill">My Bill</a></li>
+								<li><a class="gn-icon gn-icon-archive" href=#/billUsage>Data Usage</a></li>
+								
+							</ul>
+						</div><!-- /gn-scroller -->
+					</nav>
+				</li>
+				<li><a class="codrops-icon codrops-icon-prev" onclick="goBack()"><span></span></a></li>
+				<li><a href="">Mediation Billing</a></li>
+				<li><a href="#/myDetails">Hi <span ng-bind="username"></span><span>!</span></a></li>
+				
+				
+				<li><a class="codrops-icon codrops-icon-drop" ng-click="logout()"><span>Logout</span></a></li>
+			</ul>
+			
+		</div><!-- /container -->
+			<!-- Don't touch code after this line -->
+	<div class="container-fluid" style=" margin-top:5%; margin-left:auto;">
+		<div class="text-center">
+			<div ng-view="myView"></div>
+		</div>
+	</div>
+		
+		
+		<script src="../js/user/classie.js"></script>
+		<script src="../js/user/gnmenu.js"></script>
+		<script>
+			new gnMenu( document.getElementById( 'gn-menu' ) );
+		</script>
+	
+		
+	</body>
+</html>

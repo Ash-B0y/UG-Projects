@@ -1,0 +1,434 @@
+package com.example.ash.otp;
+import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+import static com.example.ash.otp.MainActivity.mob;
+
+
+public class book extends AppCompatActivity implements OnItemSelectedListener {
+    List<String> names1 = MainActivity.na;
+    List<String> age1 = MainActivity.ag;
+    List<String> gen1 = MainActivity.ge;
+    List<String> reg1 = MainActivity.re;
+    List<String> doctor = new ArrayList<String>();
+    List<String> sid= new ArrayList<String>();
+    List<String> slt = new ArrayList<String>();
+    int s=names1.size();
+    ConnectionClass connectionClass;
+    String doc="";
+    String sl="";
+    String na1="";
+    String doct1="";
+    String dep1="";
+    String drid="";
+    boolean check;
+    int day;
+    int month;
+    int year;
+    TextView t1,t2,t3,t4,t5,t6;
+    Button b1;
+    int flcnt=0;
+Spinner spin1,spin2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_book);
+        this.setTitle("Book Appointment");
+        t1 = (TextView) findViewById(R.id.textView6);
+        t2 = (TextView) findViewById(R.id.textView7);
+        t3 = (TextView) findViewById(R.id.textView8);
+        t4 = (TextView) findViewById(R.id.textView9);
+        t5 = (TextView) findViewById(R.id.textView10);
+        t6 = (TextView) findViewById(R.id.textView15);
+        b1 = (Button) findViewById(R.id.button4);
+        connectionClass = new ConnectionClass();
+        int c1, c2;
+        c1 = MainActivity.flag;
+        c2 = reg.flag1;
+            if (c1 == 1) {
+                String n = MainActivity.name;
+                String a = MainActivity.age;
+                String g = MainActivity.gen;
+                String r = MainActivity.reg;
+                t2.setText(g);
+                t3.setText(n);
+                t4.setText(r);
+                t5.setText(a);
+                spin1 = (Spinner) findViewById(R.id.spinner2);
+                List<String> doc1 = MainActivity.doc;
+                ArrayAdapter aa1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, doc1);
+                aa1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin1.setAdapter(aa1);
+                MainActivity.flag = 0;
+            }
+            if (c2 == 1) {
+                String n1 = reg.name;
+                String a1 = reg.age;
+                String g1 = reg.gen;
+                String r1 = reg.reg;
+                t2.setText(g1);
+                t3.setText(n1);
+                t4.setText(r1);
+                t5.setText(a1);
+                spin1 = (Spinner) findViewById(R.id.spinner2);
+                List<String> doc1 = reg.dcdep;
+                ArrayAdapter aa1 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, doc1);
+                aa1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin1.setAdapter(aa1);
+                reg.flag1 = 0;
+            }
+
+        final DatePicker datePicker = (DatePicker) findViewById(R.id.datePicker);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        final Spinner spin = (Spinner) findViewById(R.id.spinner);
+        spin2 = (Spinner) findViewById(R.id.spinner3);
+        spin.setOnItemSelectedListener(this);
+        final String MOB = MainActivity.mob;
+        t1.setText(MOB);
+        //Creating the ArrayAdapter instance having the country list
+        ArrayAdapter aa = new ArrayAdapter(this, android.R.layout.simple_spinner_item, names1);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
+        ArrayAdapter aa2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, slt);
+        aa2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spin2.setAdapter(aa2);
+        datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
+                day = datePicker.getDayOfMonth();
+                month = datePicker.getMonth() + 1;
+                year = datePicker.getYear();
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.HOUR_OF_DAY, 0);
+                c.set(Calendar.MINUTE, 0);
+                c.set(Calendar.SECOND, 0);
+                c.set(Calendar.MILLISECOND, 0);
+                Date today = c.getTime();
+                c.set(Calendar.YEAR, year);
+                c.set(Calendar.MONTH, month - 1);
+                c.set(Calendar.DAY_OF_MONTH, day);
+                c.set(Calendar.HOUR_OF_DAY, 0);
+                c.set(Calendar.MINUTE, 0);
+                c.set(Calendar.SECOND, 0);
+                c.set(Calendar.MILLISECOND, 0);
+                Date dateSpecified = c.getTime();
+                SimpleDateFormat simpledateformat = new SimpleDateFormat("EEEE");
+                String dayOfWeek = simpledateformat.format(dateSpecified);
+                if (dateSpecified.before(today)) {
+                    flcnt=1;
+                }
+
+                    book.app slot = new book.app();
+                    int d=spin1.getSelectedItemPosition();
+                    String Drid=sid.get(d);
+                    slot.execute(Drid,dayOfWeek);
+
+
+            }
+        });
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                  {
+                    if(check==false) {
+                        doc = spin1.getSelectedItem().toString();
+                        sl = spin2.getSelectedItem().toString();
+                        day = datePicker.getDayOfMonth();
+                        month = datePicker.getMonth() + 1;
+                        year = datePicker.getYear();
+                        String msg = "Greetings " + na1 + "!!!! Your appointment with " + doc + " has been successfully booked for the " + sl + " Session on " + day + "-" + month + "-" + year;
+                       book.sendssms send = new book.sendssms();
+                        send.execute(msg,MOB);
+                    }
+                    else
+                    {
+                        String msg = "Sorry!!!!! Your Appointment could not be booked due to non availability of Doctors";
+                        book.sendssms send = new book.sendssms();
+                        send.execute(msg,MOB);
+                    }
+                }
+            }
+
+        });
+        t6.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent regi = new Intent(getBaseContext(), reg.class);
+                startActivity(regi);
+
+            }
+        });
+    }
+
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+
+
+                na1 = names1.get(position);
+                int p1 = names1.indexOf(na1);
+                String register = reg1.get(p1);
+                String age2 = age1.get(p1);
+                String gen2 = gen1.get(p1);
+                t2.setText(gen2);
+                t3.setText(na1);
+                t4.setText(register);
+                t5.setText(age2);
+                book.DoLogin doLogin = new book.DoLogin();
+                doLogin.execute(na1);
+
+
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+        // TODO Auto-generated method stub
+    }
+
+    public class DoLogin extends AsyncTask<String, String, String> {
+        String z = "";
+        Boolean isSuccess = false;
+        String Mo= mob;
+        @Override
+        protected void onPreExecute() {
+
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            Toast.makeText(book.this, r, Toast.LENGTH_SHORT).show();
+
+            if (isSuccess) {
+                Toast.makeText(book.this, "Re-Directing" , Toast.LENGTH_SHORT).show();
+                ArrayAdapter aa3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, doctor);
+                aa3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin1.setAdapter(aa3);
+
+            }
+            else
+            {
+                ArrayAdapter aa3 = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_spinner_item, doctor);
+                aa3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin1.setAdapter(aa3);
+            }
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String name = params[0];
+            try {
+                Connection con = connectionClass.CONN();
+                if (con == null) {
+                    z = "Error in connection with SQL server";
+                } else {
+                    String brid="";
+                    doct1="";
+                    dep1="";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("select BRANCHID from M_Person where PERSONNM ='" + name + "'");
+                    while (rs.next()) {
+                        brid=rs.getString("BRANCHID");
+                    }
+                    rs = stmt.executeQuery("SELECT DISTINCT M_Person.PERSONNM,M_SubDepartment.subdeptnm,DrSkill.DRSKILLID FROM M_Person INNER JOIN M_Doctor ON M_Person.PERSONID=M_Doctor.PERSONID INNER JOIN DrSkill ON M_Doctor.DRID=DrSkill.DRID INNER JOIN M_SubDepartment ON DrSkill.SUBDEPTID=M_SubDepartment.subdeptid INNER JOIN DrBranchFee ON DrBranchFee.branchid='"+brid+"'");
+
+                    doctor.clear();
+                    sid.clear();
+                    while (rs.next()) {
+                        String te="";
+                        doct1=rs.getString("PERSONNM");
+                        dep1=rs.getString("subdeptnm");
+                        drid=rs.getString("DRSKILLID");
+                        te="Dr. "+doct1+"-"+dep1;
+                        doctor.add(te);
+                        sid.add(drid);
+                    }
+                    if (dep1 != "") {
+
+                        z = "Fetching Corresponding Data";
+                        isSuccess = true;
+                        flcnt=0;
+
+                    } else {
+                        z = "No Doctors Available at this Branch";
+                        isSuccess = false;
+                        flcnt=1;
+                    }
+
+                    }
+
+
+            } catch (Exception ex) {
+                isSuccess = false;
+                z = "Exceptions";
+                ex.printStackTrace();
+            }
+
+            return z;
+
+        }
+    }
+    public class sendssms extends AsyncTask<String, String, String> {
+
+        String a="";
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(book.this, "Sending SMS", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            Toast.makeText(book.this, r, Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String msg=params[0];
+                String user = "vignana";
+                String text = msg;
+                String pass = "smsvignana";
+                String sender = "SAHOSP";
+                String phone = params[1];
+                String priority = "ndnd";
+                String stype = "normal";
+
+                HttpURLConnection conn = (HttpURLConnection) new URL("http://bhashsms.com/api/sendmsg.php?user=vignana&pass=smsvignana&sender=SAHOSP&phone=" + phone + "&text=" + text + "&priority=ndnd&stype=normal").openConnection();
+                String data = user + pass + sender + phone + text + priority + stype;
+                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+                conn.getOutputStream().write(data.getBytes("UTF-8"));
+                final BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                final StringBuffer stringBuffer = new StringBuffer();
+                String line;
+                while ((line = rd.readLine()) != null) {
+                    //stringBuffer.append(line);
+                    //Toast.makeText(getApplicationContext(), "the message is " + line, Toast.LENGTH_LONG).show();
+                }
+                rd.close();
+                //return stringBuffer.toString();
+                //sendMessage(phoneNo, otp);
+            } catch (Exception e) {
+
+                System.out.println("Error SMS " + e);
+                Toast.makeText(getApplicationContext(), "the error message is" + e, Toast.LENGTH_LONG).show();
+                //return "Error "+e; }
+                e.printStackTrace();
+            }
+            a="SMS sent Successfully";
+            return a;
+
+        }
+    }
+    public class app extends AsyncTask<String, String, String> {
+
+        String z = "";
+        @Override
+        protected void onPreExecute() {
+            Toast.makeText(book.this, "Checking Slot Sessions", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        protected void onPostExecute(String r) {
+            Toast.makeText(book.this, z, Toast.LENGTH_SHORT).show();
+            if(flcnt==1)
+            {
+                Toast.makeText(getApplicationContext(), "Past Date is not accepted for booking an appointment!!!", Toast.LENGTH_LONG).show();
+                flcnt=0;
+                check=true;
+            }
+            ArrayAdapter aa5 = new ArrayAdapter(getApplication(), android.R.layout.simple_spinner_item, slt);
+            aa5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spin2.setAdapter(aa5);
+
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                String dcid=params[0];
+                String week=params[1];
+                Connection con = connectionClass.CONN();
+                if (con == null) {
+                    z = "Error in connection with SQL server";
+                } else {
+                    String slid="";
+                    Statement stmt = con.createStatement();
+                    ResultSet rs = stmt.executeQuery("select (drChg+dbf.drhospchg)as drChg,da.TIMESLOTID,w.weekdaynm from DrBranchFee dbf left join DrAvailability da on da.drchgid=dbf.drchgid left join Weekdays w on w.weekdayid=da.WEEKDAYID where dbf.drSkillid='"+dcid+"' and w.weekdaynm='"+week+"'");
+                    slt.clear();
+                    while (rs.next()) {
+                        String sess="";
+                        slid=rs.getString("TIMESLOTID");
+                        if(slid.equals("1"))
+                            sess="Entire day";
+                        else if(slid.equals("2"))
+                            sess="Morning";
+                        else
+                            sess="Evening";
+                        slt.add(sess);
+
+                    }
+                     check=slt.isEmpty();
+                    if (check==false) {
+
+                        z = "Fetching slot Sessions";
+
+
+                    } else {
+                        z = "No Doctors Available at this Branch on your specified Appointment Date";
+                    }
+
+                }
+
+
+            } catch (Exception ex) {
+                z = "Exceptions";
+                ex.printStackTrace();
+            }
+
+            return z;
+
+        }
+    }
+
+}
+
+
+
+

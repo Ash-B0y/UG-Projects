@@ -1,0 +1,22 @@
+body {
+    background-color: #20B2AA;
+    background-size: 1366px 768px;
+    background-repeat: no-repeat;
+    
+}
+h1 {
+    color: black;
+	text-align:center;
+}
+p {
+  
+    color: #32CD32;
+	text-align:center;
+  }
+
+#img{
+margin-top:20px;
+}
+#tb:focus{
+box-shadow:1px 1px 10px blue;
+}

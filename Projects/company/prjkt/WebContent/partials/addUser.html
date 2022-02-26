@@ -1,0 +1,80 @@
+<div>
+	<form ng-submit="addUserForm.submitForm()">
+		<div class="row" style="color: white;">
+			<div class="col-md-offset-1 col-md-4">
+				<div class="form-group">
+					<label>Name</label> <input type="text" class="form-control"
+						ng-model="addUserForm.fullName" required="required" />
+				</div>
+
+				<div class="form-group">
+					<label>Date of Birth</label> <input type="date"
+						class="form-control" ng-model="addUserForm.dateofbirth"
+						required="required" />
+				</div>
+				<div class="form-group">
+					<label>Contact Number</label> <input type="text"
+						class="form-control" ng-model="addUserForm.contactNo"
+						/>
+				</div>
+				<div class="form-group">
+					<label for="textArea">Address</label>
+					<textarea id="textarea" class="form-control" rows="5" cols="30"
+						ng-model="addUserForm.address"></textarea>
+				</div>
+
+			</div>
+			<div class="col-md-offset-2 col-md-4 ">
+				<div class="form-group">
+					<label>EmailId</label> <input type="email" class="form-control"
+						ng-model="addUserForm.emailId" required="required" />
+				</div>
+
+				<div class="form-group">
+					<label>UserName</label> <input type="text" class="form-control"
+						ng-model="addUserForm.userName" required="required" />
+				</div>
+				<div class="form-group">
+					<label>Password</label> <input type="password" class="form-control"
+						ng-model="addUserForm.password" required="required" />
+				</div>
+
+
+
+				<div class="form-group">
+					<label>Plan:</label> <select class="form-control"
+						ng-model="addUserForm.packages" required="required">
+						<option value="">--Select--</option>
+						<option value="MomNDad">MomNDad</option>
+						<option value="TorrentGuy">TorrentGuy</option>
+						<option value="VideoMate">VideoMate</option>
+						<option value="SocialTeen">SocialTeen</option>
+					</select>
+				</div>
+
+
+				<div class="form-group">
+					<label>Role:</label> <select class="form-control"
+						ng-model="addUserForm.role" required="required">
+						<option value="">--Select--</option>
+						<option value='A'>Admin</option>
+						<option value='C'>Customer</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label>MacAddress</label> <input type="text" class="form-control"
+						ng-model="addUserForm.mac" required="required" />
+				</div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<div class="row" align="center">
+			<input type="submit" class="btn btn-primary" value="Submit">
+			<input type="reset" class="btn btn-primary" value="Reset">
+		</div>
+	</form>
+	<br />
+	<div ng-bind="addUserForm.message"></div>
+</div>

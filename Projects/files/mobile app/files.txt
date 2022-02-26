@@ -1,0 +1,1150 @@
+/****** Object:  Table [dbo].[AllocateDr]    Script Date: 03/17/2018 13:01:33 ******/
+DROP TABLE [dbo].[AllocateDr]
+GO
+/****** Object:  Table [dbo].[BookingSubType]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[BookingSubType]
+GO
+/****** Object:  Table [dbo].[DrAppointCancel]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[DrAppointCancel]
+GO
+/****** Object:  Table [dbo].[DrAppointment]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[DrAppointment]
+GO
+/****** Object:  Table [dbo].[DrAvailability]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[DrAvailability]
+GO
+/****** Object:  Table [dbo].[DrBranchFee]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[DrBranchFee]
+GO
+/****** Object:  Table [dbo].[DrSkill]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[DrSkill]
+GO
+/****** Object:  Table [dbo].[M_Branch]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[M_Branch]
+GO
+/****** Object:  Table [dbo].[M_Doctor]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[M_Doctor]
+GO
+/****** Object:  Table [dbo].[M_Gender]    Script Date: 03/17/2018 13:01:34 ******/
+DROP TABLE [dbo].[M_Gender]
+GO
+/****** Object:  Table [dbo].[M_Person]    Script Date: 03/17/2018 13:01:34 ******/
+ALTER TABLE [dbo].[M_Person] DROP CONSTRAINT [DF_M_Person_vstActive]
+GO
+ALTER TABLE [dbo].[M_Person] DROP CONSTRAINT [DF_M_Person_igstcustomer]
+GO
+DROP TABLE [dbo].[M_Person]
+GO
+/****** Object:  Table [dbo].[M_PersonTitle]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[M_PersonTitle]
+GO
+/****** Object:  Table [dbo].[M_SubDepartment]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[M_SubDepartment]
+GO
+/****** Object:  Table [dbo].[M_TimeSlot]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[M_TimeSlot]
+GO
+/****** Object:  Table [dbo].[M_User]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[M_User]
+GO
+/****** Object:  Table [dbo].[PatientVisit]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[PatientVisit]
+GO
+/****** Object:  Table [dbo].[PersonPhoto]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[PersonPhoto]
+GO
+/****** Object:  Table [dbo].[S_FinYear]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[S_FinYear]
+GO
+/****** Object:  Table [dbo].[S_FyDocNum]    Script Date: 03/17/2018 13:01:35 ******/
+ALTER TABLE [dbo].[S_FyDocNum] DROP CONSTRAINT [DF_S_FyDocNum_nextjeno]
+GO
+DROP TABLE [dbo].[S_FyDocNum]
+GO
+/****** Object:  Table [dbo].[S_TokenNum]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[S_TokenNum]
+GO
+/****** Object:  Table [dbo].[S_TokenStatus]    Script Date: 03/17/2018 13:01:35 ******/
+DROP TABLE [dbo].[S_TokenStatus]
+GO
+/****** Object:  Table [dbo].[S_UserLog]    Script Date: 03/17/2018 13:01:36 ******/
+DROP TABLE [dbo].[S_UserLog]
+GO
+/****** Object:  Table [dbo].[S_VisitType]    Script Date: 03/17/2018 13:01:36 ******/
+DROP TABLE [dbo].[S_VisitType]
+GO
+/****** Object:  Table [dbo].[UserBranch]    Script Date: 03/17/2018 13:01:36 ******/
+DROP TABLE [dbo].[UserBranch]
+GO
+/****** Object:  Table [dbo].[Weekdays]    Script Date: 03/17/2018 13:01:36 ******/
+DROP TABLE [dbo].[Weekdays]
+GO
+/****** Object:  Table [dbo].[Weekdays]    Script Date: 03/17/2018 13:01:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Weekdays](
+	[weekdayid] [int] IDENTITY(1,1) NOT NULL,
+	[weekdaynm] [varchar](15) NULL,
+ CONSTRAINT [PK_Weekdays] PRIMARY KEY CLUSTERED 
+(
+	[weekdayid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Weekdays] ON
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (1, N'Sunday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (2, N'Monday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (3, N'Tuesday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (4, N'Wednesday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (5, N'Thursday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (6, N'Friday')
+INSERT [dbo].[Weekdays] ([weekdayid], [weekdaynm]) VALUES (7, N'Saturday')
+SET IDENTITY_INSERT [dbo].[Weekdays] OFF
+/****** Object:  Table [dbo].[UserBranch]    Script Date: 03/17/2018 13:01:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserBranch](
+	[usrbranchid] [bigint] IDENTITY(1,1) NOT NULL,
+	[Uid] [int] NULL,
+	[branchid] [int] NULL,
+	[statusid] [int] NULL,
+	[postinguid] [int] NULL,
+	[postdt] [datetime] NULL,
+ CONSTRAINT [PK_UserBranch] PRIMARY KEY CLUSTERED 
+(
+	[usrbranchid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[UserBranch] ON
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (1, 1, 1, 1, 1, CAST(0x0000A26900000000 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (2, 2, 1, 1, 1, CAST(0x0000A4D6007E18B9 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (3, 3, 1, 1, 1, CAST(0x0000A4D600802BC6 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (4, 4, 1, 1, 1, CAST(0x0000A8A600B41335 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (5, 5, 1, 1, 1, CAST(0x0000A8A600B4BD81 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (6, 4, 2, 2, 1, CAST(0x0000A8A600B41328 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (7, 4, 3, 2, 1, CAST(0x0000A8A600B4133F AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (8, 5, 2, 2, 1, CAST(0x0000A8A600B4BD5F AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (9, 5, 3, 2, 1, CAST(0x0000A8A600B4BD8B AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (10, 6, 2, 2, 1, CAST(0x0000A8A600B77C46 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (11, 6, 1, 1, 1, CAST(0x0000A8A600B77C52 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (12, 6, 3, 2, 1, CAST(0x0000A8A600B77C5E AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (13, 7, 2, 1, 1, CAST(0x0000A8A600B8CF51 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (14, 7, 1, 2, 1, CAST(0x0000A8A600B8CF5E AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (15, 7, 3, 2, 1, CAST(0x0000A8A600B8CF68 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (16, 8, 2, 2, 1, CAST(0x0000A8A600B9C649 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (17, 8, 1, 2, 1, CAST(0x0000A8A600B9C655 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (18, 8, 3, 1, 1, CAST(0x0000A8A600B9C662 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (19, 9, 2, 2, 1, CAST(0x0000A8A600BAACF4 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (20, 9, 1, 1, 1, CAST(0x0000A8A600BAAD02 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (21, 9, 3, 2, 1, CAST(0x0000A8A600BAAD0C AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (22, 10, 2, 2, 1, CAST(0x0000A8A600BC3B10 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (23, 10, 1, 2, 1, CAST(0x0000A8A600BC3B23 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (24, 10, 3, 1, 1, CAST(0x0000A8A600BC3B2D AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (25, 11, 2, 2, 1, CAST(0x0000A8A600BD0CA3 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (26, 11, 1, 1, 1, CAST(0x0000A8A600BD0CC0 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (27, 11, 3, 2, 1, CAST(0x0000A8A600BD0CE8 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (28, 12, 2, 2, 1, CAST(0x0000A8A600C21494 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (29, 12, 1, 1, 1, CAST(0x0000A8A600C214A6 AS DateTime))
+INSERT [dbo].[UserBranch] ([usrbranchid], [Uid], [branchid], [statusid], [postinguid], [postdt]) VALUES (30, 12, 3, 2, 1, CAST(0x0000A8A600C214B0 AS DateTime))
+SET IDENTITY_INSERT [dbo].[UserBranch] OFF
+/****** Object:  Table [dbo].[S_VisitType]    Script Date: 03/17/2018 13:01:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[S_VisitType](
+	[VstTypeid] [int] IDENTITY(1,1) NOT NULL,
+	[VstTypeNm] [varchar](20) NULL,
+	[VstTypeSht] [varchar](5) NULL,
+ CONSTRAINT [PK_S_VisitType] PRIMARY KEY CLUSTERED 
+(
+	[VstTypeid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[S_VisitType] ON
+INSERT [dbo].[S_VisitType] ([VstTypeid], [VstTypeNm], [VstTypeSht]) VALUES (1, N'Outpatient', N'OP')
+INSERT [dbo].[S_VisitType] ([VstTypeid], [VstTypeNm], [VstTypeSht]) VALUES (2, N'Inpatient', N'IP')
+SET IDENTITY_INSERT [dbo].[S_VisitType] OFF
+/****** Object:  Table [dbo].[S_UserLog]    Script Date: 03/17/2018 13:01:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[S_UserLog](
+	[USRLOGID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[UID] [int] NULL,
+	[FORMID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[OPNID] [int] NULL,
+	[LOGREM] [varchar](500) NULL,
+	[REFSYSID] [bigint] NULL,
+ CONSTRAINT [PK_S_UserLog] PRIMARY KEY CLUSTERED 
+(
+	[USRLOGID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[S_UserLog] ON
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100000, 1, 1, CAST(0x0000A8A600B1BE92 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100001, 1, 1, CAST(0x0000A8A600B2B2CB AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100002, 1, 3, CAST(0x0000A8A600B313C0 AS DateTime), 1, N'Created a Person Registration by Name''Subangi''.With Id  2', 2)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100003, 1, 41, CAST(0x0000A8A600B35A10 AS DateTime), 1, N'Created a Doctor Name by ''Subangi'' .With Id2', 2)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100004, 1, 47, CAST(0x0000A8A600B3A060 AS DateTime), 2, N' User Role of Person  Subangi  is Updated successfully.', 4)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100005, 1, 47, CAST(0x0000A8A600B3E6B0 AS DateTime), 2, N' User Role of Person  Subangi  is Updated successfully.', 4)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100006, 1, 3, CAST(0x0000A8A600B42D00 AS DateTime), 1, N'Created a Person Registration by Name''Charulatha''.With Id  3', 3)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100007, 1, 41, CAST(0x0000A8A600B47350 AS DateTime), 1, N'Created a Doctor Name by ''Charulatha'' .With Id3', 3)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100008, 1, 47, CAST(0x0000A8A600B4B9A0 AS DateTime), 2, N' User Role of Person  Charulatha  is Updated successfully.', 5)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100009, 1, 3, CAST(0x0000A8A600B4B9A0 AS DateTime), 1, N'Created a Person Registration by Name''Kamakshi''.With Id  4', 4)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100010, 1, 41, CAST(0x0000A8A600B4FFF0 AS DateTime), 1, N'Created a Doctor Name by ''Kamakshi'' .With Id4', 4)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100011, 1, 74, CAST(0x0000A8A600B54640 AS DateTime), 1, N'Created a TimeSlot by Name ''10:00 to 14:00'' .With Id:1', 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100012, 1, 47, CAST(0x0000A8A600B5D2E0 AS DateTime), 2, N' User Role of Person  Kamakshi  is Updated successfully.', 6)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100013, 1, 47, CAST(0x0000A8A600B73270 AS DateTime), 2, N' User Role of Person  Kamakshi  is Updated successfully.', 6)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100014, 1, 47, CAST(0x0000A8A600B778C0 AS DateTime), 2, N' User Role of Person  Kamakshi  is Updated successfully.', 6)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100015, 1, 74, CAST(0x0000A8A600B7BF10 AS DateTime), 1, N'Created a TimeSlot by Name ''17:00 to 21:00'' .With Id:1', 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100016, 1, 3, CAST(0x0000A8A600B7BF10 AS DateTime), 1, N'Created a Person Registration by Name''Velmurugan''.With Id  5', 5)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100017, 1, 41, CAST(0x0000A8A600B80560 AS DateTime), 1, N'Created a Doctor Name by ''Velmurugan'' .With Id5', 5)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100018, 1, 47, CAST(0x0000A8A600B84BB0 AS DateTime), 2, N' User Role of Person  Velmurugan  is Updated successfully.', 7)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100019, 1, 47, CAST(0x0000A8A600B89200 AS DateTime), 2, N' User Role of Person  Velmurugan  is Updated successfully.', 7)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100020, 1, 47, CAST(0x0000A8A600B89200 AS DateTime), 2, N' User Role of Person  Velmurugan  is Updated successfully.', 7)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100021, 1, 3, CAST(0x0000A8A600B8D850 AS DateTime), 1, N'Created a Person Registration by Name''Sri Lakshmi''.With Id  6', 6)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100022, 1, 41, CAST(0x0000A8A600B964F0 AS DateTime), 1, N'Created a Doctor Name by ''Sri Lakshmi'' .With Id6', 6)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100023, 1, 47, CAST(0x0000A8A600B964F0 AS DateTime), 2, N' User Role of Person  Sri Lakshmi  is Updated successfully.', 8)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100024, 1, 47, CAST(0x0000A8A600B9AB40 AS DateTime), 2, N' User Role of Person  Sri Lakshmi  is Updated successfully.', 8)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100025, 1, 3, CAST(0x0000A8A600B9F190 AS DateTime), 1, N'Created a Person Registration by Name''Chinmayee''.With Id  7', 7)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100026, 1, 41, CAST(0x0000A8A600BA37E0 AS DateTime), 1, N'Created a Doctor Name by ''Chinmayee'' .With Id7', 7)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100027, 1, 47, CAST(0x0000A8A600BA37E0 AS DateTime), 2, N' User Role of Person  Chinmayee  is Updated successfully.', 9)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100028, 1, 47, CAST(0x0000A8A600BA7E30 AS DateTime), 2, N' User Role of Person  Chinmayee  is Updated successfully.', 9)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100029, 1, 3, CAST(0x0000A8A600BB5120 AS DateTime), 1, N'Created a Person Registration by Name''Sairam''.With Id  8', 8)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100030, 1, 41, CAST(0x0000A8A600BBDDC0 AS DateTime), 1, N'Created a Doctor Name by ''Sairam'' .With Id8', 8)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100031, 1, 47, CAST(0x0000A8A600BBDDC0 AS DateTime), 2, N' User Role of Person  Sairam  is Updated successfully.', 10)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100032, 1, 47, CAST(0x0000A8A600BC2410 AS DateTime), 2, N' User Role of Person  Sairam  is Updated successfully.', 10)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100033, 1, 3, CAST(0x0000A8A600BC6A60 AS DateTime), 1, N'Created a Person Registration by Name''Shashank''.With Id  9', 9)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100034, 1, 41, CAST(0x0000A8A600BCB0B0 AS DateTime), 1, N'Created a Doctor Name by ''Shashank'' .With Id9', 9)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100035, 1, 47, CAST(0x0000A8A600BCB0B0 AS DateTime), 2, N' User Role of Person  Shashank  is Updated successfully.', 11)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100036, 1, 47, CAST(0x0000A8A600BCF700 AS DateTime), 2, N' User Role of Person  Shashank  is Updated successfully.', 11)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100037, 1, 3, CAST(0x0000A8A600C08910 AS DateTime), 1, N'Created a Person Registration by Name''Miruthula''.With Id  10', 10)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100038, 1, 41, CAST(0x0000A8A600C115B0 AS DateTime), 1, N'Created a Doctor Name by ''Miruthula'' .With Id10', 10)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100039, 1, 47, CAST(0x0000A8A600C1A250 AS DateTime), 2, N' User Role of Person  Miruthula  is Updated successfully.', 12)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100040, 1, 47, CAST(0x0000A8A600C1E8A0 AS DateTime), 2, N' User Role of Person  Miruthula  is Updated successfully.', 12)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100041, 1, 3, CAST(0x0000A8A600C4A7C0 AS DateTime), 1, N'Created a Person Registration by Name''Karuna''.With Id  11', 11)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100042, 1, 3, CAST(0x0000A8A600C839D0 AS DateTime), 1, N'Created a Person Registration by Name''Suganthi''.With Id  12', 12)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100043, 1, 1, CAST(0x0000A8A600C94B4E AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100044, 1, 3, CAST(0x0000A8A600C90CC0 AS DateTime), 1, N'Created a Person Registration by Name''Saravanan''.With Id  13', 13)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100045, 1, 74, CAST(0x0000A8A600CA2600 AS DateTime), 1, N'Created a TimeSlot by Name ''13:00 to 15:00'' .With Id:1', 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100046, 1, 3, CAST(0x0000A8A600CA2600 AS DateTime), 1, N'Created a Person Registration by Name''Kirupakar''.With Id  14', 14)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100047, 1, 1, CAST(0x0000A8A600CC372E AS DateTime), 1, N'Failed Login Attempt with User Name is admin, Password  admiin, system name  fd9c:b2b2:d7c8:c100:e448:518d:1a12:d248 and ip address  vsserver', 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100048, 1, 1, CAST(0x0000A8A600CC3E27 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100049, 1, 1, CAST(0x0000A8A600CC90D9 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100050, 1, 3, CAST(0x0000A8A600CC9ED0 AS DateTime), 1, N'Created a Person Registration by Name''Kaliammal''.With Id  15', 15)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100051, 1, 3, CAST(0x0000A8A600CD71C0 AS DateTime), 1, N'Created a Person Registration by Name''Muniappan''.With Id  16', 16)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100052, 1, 3, CAST(0x0000A8A600CE8B00 AS DateTime), 1, N'Created a Person Registration by Name''Rajasekar''.With Id  17', 17)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100053, 1, 3, CAST(0x0000A8A600CF17A0 AS DateTime), 1, N'Created a Person Registration by Name''Sathyan''.With Id  18', 18)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100054, 1, 3, CAST(0x0000A8A600CFA440 AS DateTime), 1, N'Created a Person Registration by Name''Polammal''.With Id  19', 19)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100055, 1, 3, CAST(0x0000A8A600D030E0 AS DateTime), 1, N'Created a Person Registration by Name''sasa''.With Id  20', 20)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100056, 1, 5, CAST(0x0000A8A600D030E0 AS DateTime), 1, N'Created a Visit by''admin'' .With Id2', 2)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100057, 1, 3, CAST(0x0000A8A600D07730 AS DateTime), 1, N'Created a Person Registration by Name''ammu''.With Id  21', 21)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100058, 1, 5, CAST(0x0000A8A600D0BD80 AS DateTime), 1, N'Created a Visit by''admin'' .With Id3', 3)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100059, 1, 3, CAST(0x0000A8A600D0BD80 AS DateTime), 1, N'Created a Person Registration by Name''Velraj''.With Id  22', 22)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100060, 1, 3, CAST(0x0000A8A600D07730 AS DateTime), 1, N'Created a Person Registration by Name''Rohan''.With Id  23', 23)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100061, 1, 5, CAST(0x0000A8A600D0BD80 AS DateTime), 1, N'Created a Visit by''admin'' .With Id4', 4)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100062, 1, 1, CAST(0x0000A8A600D1A437 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100063, 1, 1, CAST(0x0000A8A600D1EC7C AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_UserLog] ([USRLOGID], [UID], [FORMID], [POSTDT], [OPNID], [LOGREM], [REFSYSID]) VALUES (100064, 1, 3, CAST(0x0000A8A600D21D10 AS DateTime), 1, N'Created a Person Registration by Name''Bobby''.With Id  24', 24)
+SET IDENTITY_INSERT [dbo].[S_UserLog] OFF
+/****** Object:  Table [dbo].[S_TokenStatus]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[S_TokenStatus](
+	[tokenStatusid] [int] IDENTITY(1,1) NOT NULL,
+	[tokenstatusnm] [varchar](40) NULL,
+ CONSTRAINT [PK_S_TokenStatus] PRIMARY KEY CLUSTERED 
+(
+	[tokenStatusid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[S_TokenStatus] ON
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (1, N'Not Met Doctor and visit is active')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (2, N'Met Doctor and  visit is not closed')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (3, N'Token Cancelled')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (4, N'Met Dr and Visit closed')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (5, N'Not Met Doctor and visit is closed')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (6, N'Appointment booked')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (7, N'Appointment cancelled by Patient')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (8, N'Appointment cancelled by Dr')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (9, N'Appointment cancelled by Hospital')
+INSERT [dbo].[S_TokenStatus] ([tokenStatusid], [tokenstatusnm]) VALUES (10, N'Visit made ')
+SET IDENTITY_INSERT [dbo].[S_TokenStatus] OFF
+/****** Object:  Table [dbo].[S_TokenNum]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[S_TokenNum](
+	[TOKENID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[TOKENNO] [int] NULL,
+	[DRID] [int] NULL,
+	[BRANCHID] [int] NULL,
+	[VISITDT] [datetime] NULL,
+	[TIMESLOTID] [int] NULL,
+ CONSTRAINT [PK_S_TokenNum] PRIMARY KEY CLUSTERED 
+(
+	[TOKENID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[S_TokenNum] ON
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100000, 2, 100000, 1, CAST(0x0000A54100000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100001, 2, 3, 1, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100002, 2, 5, 2, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100003, 2, 6, 3, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100004, 2, 9, 1, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100005, 2, 4, 1, CAST(0x0000A8A900000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100006, 2, 4, 1, CAST(0x0000A8AA00000000 AS DateTime), 2)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100007, 2, 8, 3, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100008, 2, 4, 1, CAST(0x0000A8AE00000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100009, 2, 10, 1, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100010, 3, 6, 3, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100011, 2, 7, 1, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100012, 2, 1, 1, CAST(0x0000A8A600000000 AS DateTime), 3)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100013, 4, 6, 3, CAST(0x0000A8A700000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100014, 2, 3, 1, CAST(0x0000A8AB00000000 AS DateTime), 1)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100015, 3, 1, 1, CAST(0x0000A8A600000000 AS DateTime), 3)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100016, 2, 5, 1, CAST(0x0000A8A600000000 AS DateTime), 3)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100017, 2, 3, 1, CAST(0x0000A8A600000000 AS DateTime), 2)
+INSERT [dbo].[S_TokenNum] ([TOKENID], [TOKENNO], [DRID], [BRANCHID], [VISITDT], [TIMESLOTID]) VALUES (100018, 3, 10, 1, CAST(0x0000A8A700000000 AS DateTime), 1)
+SET IDENTITY_INSERT [dbo].[S_TokenNum] OFF
+/****** Object:  Table [dbo].[S_FyDocNum]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[S_FyDocNum](
+	[FYDOCID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[BRANCHID] [int] NULL,
+	[FYID] [int] NULL,
+	[NEXTNO] [bigint] NULL,
+	[PREFIXBRANCHSHT] [char](1) NULL,
+	[SUFFIXFYNM] [char](1) NULL,
+	[DOCID] [int] NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[IPNEXTNO] [bigint] NULL,
+	[jetypeid] [int] NULL,
+	[nextjeno] [bigint] NULL CONSTRAINT [DF_S_FyDocNum_nextjeno]  DEFAULT ((1)),
+ CONSTRAINT [PK_S_FyDocNum] PRIMARY KEY CLUSTERED 
+(
+	[FYDOCID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[S_FyDocNum] ON
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100000, 1, 2, 3, N'Y', N'Y', 1, 1, CAST(0x0000A8A600B1B97F AS DateTime), 4, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100001, 1, 2, 4, N'Y', N'Y', 2, 1, CAST(0x0000A8A600B1B9AD AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100002, 1, 2, 1, N'Y', N'Y', 3, 1, CAST(0x0000A8A600B1B9B6 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100003, 1, 2, 1, N'Y', N'Y', 4, 1, CAST(0x0000A8A600B1B9C0 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100004, 1, 2, 1, N'Y', N'Y', 5, 1, CAST(0x0000A8A600B1B9CA AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100005, 1, 2, 1, N'Y', N'Y', 6, 1, CAST(0x0000A8A600B1B9D4 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100006, 1, 2, 1, N'Y', N'Y', 7, 1, CAST(0x0000A8A600B1B9DE AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100007, 1, 2, 1, N'Y', N'Y', 8, 1, CAST(0x0000A8A600B1B9E8 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100008, 1, 2, 1, N'Y', N'Y', 9, 1, CAST(0x0000A8A600B1B9F5 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100009, 1, 2, 1, N'Y', N'Y', 10, 1, CAST(0x0000A8A600B1B9FF AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100010, 1, 2, 1, N'Y', N'Y', 11, 1, CAST(0x0000A8A600B1BA09 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100011, 1, 2, 1, N'Y', N'Y', 12, 1, CAST(0x0000A8A600B1BA13 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100012, 1, 2, 1, N'Y', N'Y', 13, 1, CAST(0x0000A8A600B1BA1D AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100013, 1, 2, 1, N'Y', N'Y', 14, 1, CAST(0x0000A8A600B1BA27 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100014, 1, 2, 1, N'Y', N'Y', 15, 1, CAST(0x0000A8A600B1BA31 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100015, 1, 2, 1, N'Y', N'Y', 16, 1, CAST(0x0000A8A600B1BA3B AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100016, 1, 2, 1, N'Y', N'Y', 17, 1, CAST(0x0000A8A600B1BA48 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100017, 1, 2, 1, N'Y', N'Y', 18, 1, CAST(0x0000A8A600B1BA52 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100018, 1, 2, 1, N'Y', N'Y', 19, 1, CAST(0x0000A8A600B1BA5C AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100019, 1, 2, 1, N'Y', N'Y', 20, 1, CAST(0x0000A8A600B1BA66 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100020, 1, 2, 1, N'Y', N'Y', 21, 1, CAST(0x0000A8A600B1BA70 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100021, 1, 2, 1, N'Y', N'Y', 22, 1, CAST(0x0000A8A600B1BA7A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100022, 1, 2, 1, N'Y', N'Y', 23, 1, CAST(0x0000A8A600B1BA84 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100023, 1, 2, 1, N'Y', N'Y', 24, 1, CAST(0x0000A8A600B1BA8E AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100024, 1, 2, 1, N'Y', N'Y', 25, 1, CAST(0x0000A8A600B1BA9A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100025, 1, 2, 1, N'Y', N'Y', 26, 1, CAST(0x0000A8A600B1BAA4 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100026, 1, 2, 1, N'Y', N'Y', 27, 1, CAST(0x0000A8A600B1BAAE AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100027, 1, 2, 1, N'Y', N'Y', 28, 1, CAST(0x0000A8A600B1BAB8 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100028, 1, 2, 1, N'Y', N'Y', 29, 1, CAST(0x0000A8A600B1BAC2 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100029, 1, 2, 1, N'Y', N'Y', 30, 1, CAST(0x0000A8A600B1BACC AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100030, 1, 2, 1, N'Y', N'Y', 31, 1, CAST(0x0000A8A600B1BAD6 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100031, 1, 2, 1, N'Y', N'Y', 32, 1, CAST(0x0000A8A600B1BAE0 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100032, 1, 2, 1, N'Y', N'Y', 33, 1, CAST(0x0000A8A600B1BAED AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100033, 1, 2, 1, N'Y', N'Y', 34, 1, CAST(0x0000A8A600B1BAFC AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100034, 2, 2, 1, N'Y', N'Y', 1, 1, CAST(0x0000A8A600B1BB06 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100035, 2, 2, 1, N'Y', N'Y', 2, 1, CAST(0x0000A8A600B1BB10 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100036, 2, 2, 1, N'Y', N'Y', 3, 1, CAST(0x0000A8A600B1BB1A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100037, 2, 2, 1, N'Y', N'Y', 4, 1, CAST(0x0000A8A600B1BB24 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100038, 2, 2, 1, N'Y', N'Y', 5, 1, CAST(0x0000A8A600B1BB2E AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100039, 2, 2, 1, N'Y', N'Y', 6, 1, CAST(0x0000A8A600B1BB37 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100040, 2, 2, 1, N'Y', N'Y', 7, 1, CAST(0x0000A8A600B1BB43 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100041, 2, 2, 1, N'Y', N'Y', 8, 1, CAST(0x0000A8A600B1BB4D AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100042, 2, 2, 1, N'Y', N'Y', 9, 1, CAST(0x0000A8A600B1BB57 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100043, 2, 2, 1, N'Y', N'Y', 10, 1, CAST(0x0000A8A600B1BB61 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100044, 2, 2, 1, N'Y', N'Y', 11, 1, CAST(0x0000A8A600B1BB6E AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100045, 2, 2, 1, N'Y', N'Y', 12, 1, CAST(0x0000A8A600B1BB78 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100046, 2, 2, 1, N'Y', N'Y', 13, 1, CAST(0x0000A8A600B1BB82 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100047, 2, 2, 1, N'Y', N'Y', 14, 1, CAST(0x0000A8A600B1BB8C AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100048, 2, 2, 1, N'Y', N'Y', 15, 1, CAST(0x0000A8A600B1BB9B AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100049, 2, 2, 1, N'Y', N'Y', 16, 1, CAST(0x0000A8A600B1BBA5 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100050, 2, 2, 1, N'Y', N'Y', 17, 1, CAST(0x0000A8A600B1BBAF AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100051, 2, 2, 1, N'Y', N'Y', 18, 1, CAST(0x0000A8A600B1BBB9 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100052, 2, 2, 1, N'Y', N'Y', 19, 1, CAST(0x0000A8A600B1BBC3 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100053, 2, 2, 1, N'Y', N'Y', 20, 1, CAST(0x0000A8A600B1BBCD AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100054, 2, 2, 1, N'Y', N'Y', 21, 1, CAST(0x0000A8A600B1BBD7 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100055, 2, 2, 1, N'Y', N'Y', 22, 1, CAST(0x0000A8A600B1BBE1 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100056, 2, 2, 1, N'Y', N'Y', 23, 1, CAST(0x0000A8A600B1BBED AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100057, 2, 2, 1, N'Y', N'Y', 24, 1, CAST(0x0000A8A600B1BBF7 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100058, 2, 2, 1, N'Y', N'Y', 25, 1, CAST(0x0000A8A600B1BC01 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100059, 2, 2, 1, N'Y', N'Y', 26, 1, CAST(0x0000A8A600B1BC0B AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100060, 2, 2, 1, N'Y', N'Y', 27, 1, CAST(0x0000A8A600B1BC15 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100061, 2, 2, 1, N'Y', N'Y', 28, 1, CAST(0x0000A8A600B1BC1F AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100062, 2, 2, 1, N'Y', N'Y', 29, 1, CAST(0x0000A8A600B1BC29 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100063, 2, 2, 1, N'Y', N'Y', 30, 1, CAST(0x0000A8A600B1BC33 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100064, 2, 2, 1, N'Y', N'Y', 31, 1, CAST(0x0000A8A600B1BC40 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100065, 2, 2, 1, N'Y', N'Y', 32, 1, CAST(0x0000A8A600B1BC4A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100066, 2, 2, 1, N'Y', N'Y', 33, 1, CAST(0x0000A8A600B1BC54 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100067, 2, 2, 1, N'Y', N'Y', 34, 1, CAST(0x0000A8A600B1BC5E AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100068, 3, 2, 1, N'Y', N'Y', 1, 1, CAST(0x0000A8A600B1BC67 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100069, 3, 2, 1, N'Y', N'Y', 2, 1, CAST(0x0000A8A600B1BC71 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100070, 3, 2, 1, N'Y', N'Y', 3, 1, CAST(0x0000A8A600B1BC7C AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100071, 3, 2, 1, N'Y', N'Y', 4, 1, CAST(0x0000A8A600B1BC85 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100072, 3, 2, 1, N'Y', N'Y', 5, 1, CAST(0x0000A8A600B1BCA9 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100073, 3, 2, 1, N'Y', N'Y', 6, 1, CAST(0x0000A8A600B1BCBF AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100074, 3, 2, 1, N'Y', N'Y', 7, 1, CAST(0x0000A8A600B1BCD6 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100075, 3, 2, 1, N'Y', N'Y', 8, 1, CAST(0x0000A8A600B1BCEC AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100076, 3, 2, 1, N'Y', N'Y', 9, 1, CAST(0x0000A8A600B1BCF6 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100077, 3, 2, 1, N'Y', N'Y', 10, 1, CAST(0x0000A8A600B1BD00 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100078, 3, 2, 1, N'Y', N'Y', 11, 1, CAST(0x0000A8A600B1BD0A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100079, 3, 2, 1, N'Y', N'Y', 12, 1, CAST(0x0000A8A600B1BD14 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100080, 3, 2, 1, N'Y', N'Y', 13, 1, CAST(0x0000A8A600B1BD21 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100081, 3, 2, 1, N'Y', N'Y', 14, 1, CAST(0x0000A8A600B1BD2A AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100082, 3, 2, 1, N'Y', N'Y', 15, 1, CAST(0x0000A8A600B1BD34 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100083, 3, 2, 1, N'Y', N'Y', 16, 1, CAST(0x0000A8A600B1BD3F AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100084, 3, 2, 1, N'Y', N'Y', 17, 1, CAST(0x0000A8A600B1BD48 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100085, 3, 2, 1, N'Y', N'Y', 18, 1, CAST(0x0000A8A600B1BD52 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100086, 3, 2, 1, N'Y', N'Y', 19, 1, CAST(0x0000A8A600B1BD5D AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100087, 3, 2, 1, N'Y', N'Y', 20, 1, CAST(0x0000A8A600B1BD66 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100088, 3, 2, 1, N'Y', N'Y', 21, 1, CAST(0x0000A8A600B1BD73 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100089, 3, 2, 1, N'Y', N'Y', 22, 1, CAST(0x0000A8A600B1BD7D AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100090, 3, 2, 1, N'Y', N'Y', 23, 1, CAST(0x0000A8A600B1BD87 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100091, 3, 2, 1, N'Y', N'Y', 24, 1, CAST(0x0000A8A600B1BD91 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100092, 3, 2, 1, N'Y', N'Y', 25, 1, CAST(0x0000A8A600B1BD9D AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100093, 3, 2, 1, N'Y', N'Y', 26, 1, CAST(0x0000A8A600B1BDA7 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100094, 3, 2, 1, N'Y', N'Y', 27, 1, CAST(0x0000A8A600B1BDB1 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100095, 3, 2, 1, N'Y', N'Y', 28, 1, CAST(0x0000A8A600B1BDBB AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100096, 3, 2, 1, N'Y', N'Y', 29, 1, CAST(0x0000A8A600B1BDC7 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100097, 3, 2, 1, N'Y', N'Y', 30, 1, CAST(0x0000A8A600B1BDD1 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100098, 3, 2, 1, N'Y', N'Y', 31, 1, CAST(0x0000A8A600B1BDDB AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100099, 3, 2, 1, N'Y', N'Y', 32, 1, CAST(0x0000A8A600B1BDE5 AS DateTime), 1, NULL, 1)
+GO
+print 'Processed 100 total records'
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100100, 3, 2, 1, N'Y', N'Y', 33, 1, CAST(0x0000A8A600B1BDF2 AS DateTime), 1, NULL, 1)
+INSERT [dbo].[S_FyDocNum] ([FYDOCID], [BRANCHID], [FYID], [NEXTNO], [PREFIXBRANCHSHT], [SUFFIXFYNM], [DOCID], [UID], [POSTDT], [IPNEXTNO], [jetypeid], [nextjeno]) VALUES (100101, 3, 2, 1, N'Y', N'Y', 34, 1, CAST(0x0000A8A600B1BDFC AS DateTime), 1, NULL, 1)
+SET IDENTITY_INSERT [dbo].[S_FyDocNum] OFF
+/****** Object:  Table [dbo].[S_FinYear]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[S_FinYear](
+	[FYID] [int] IDENTITY(1,1) NOT NULL,
+	[FYNM] [varchar](30) NULL,
+	[FYSTDT] [datetime] NULL,
+	[FYENDT] [datetime] NULL,
+	[FYSHT] [varchar](6) NULL,
+ CONSTRAINT [PK_S_FinYear] PRIMARY KEY CLUSTERED 
+(
+	[FYID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[S_FinYear] ON
+INSERT [dbo].[S_FinYear] ([FYID], [FYNM], [FYSTDT], [FYENDT], [FYSHT]) VALUES (1, N'Apr16-Mar17', CAST(0x0000A5DB00000000 AS DateTime), CAST(0x0000A747018B80D4 AS DateTime), N'16-17')
+INSERT [dbo].[S_FinYear] ([FYID], [FYNM], [FYSTDT], [FYENDT], [FYSHT]) VALUES (2, N'Apr17-Mar18', CAST(0x0000A74800000000 AS DateTime), CAST(0x0000A8B4018B80D4 AS DateTime), N'18-19')
+SET IDENTITY_INSERT [dbo].[S_FinYear] OFF
+/****** Object:  Table [dbo].[PersonPhoto]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PersonPhoto](
+	[PHOTOID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[PERSONID] [bigint] NULL,
+	[PHOTOFNAME] [varchar](100) NULL,
+ CONSTRAINT [PK_PersonPhoto] PRIMARY KEY CLUSTERED 
+(
+	[PHOTOID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[PatientVisit]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[PatientVisit](
+	[VISITID] [bigint] IDENTITY(1,1) NOT NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[BRANCHID] [int] NULL,
+	[VISITDT] [datetime] NULL,
+	[PERSONID] [bigint] NULL,
+	[VSTTYPEID] [int] NULL,
+	[STATUSID] [int] NULL,
+	[VISITNO] [varchar](26) NULL,
+	[METDR1] [char](1) NULL,
+	[FIRSTDRID] [int] NULL,
+	[VISITDOA] [datetime] NOT NULL,
+	[VISITDOD] [datetime] NULL,
+	[opipref] [varchar](30) NULL,
+	[booksubtypeid] [int] NULL,
+	[vstSubTypeId] [int] NULL,
+	[surgerydt] [datetime] NULL,
+	[revisityn] [char](1) NULL,
+ CONSTRAINT [PK_PatientVisit] PRIMARY KEY CLUSTERED 
+(
+	[VISITID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[PatientVisit] ON
+INSERT [dbo].[PatientVisit] ([VISITID], [UID], [POSTDT], [BRANCHID], [VISITDT], [PERSONID], [VSTTYPEID], [STATUSID], [VISITNO], [METDR1], [FIRSTDRID], [VISITDOA], [VISITDOD], [opipref], [booksubtypeid], [vstSubTypeId], [surgerydt], [revisityn]) VALUES (1, 1, CAST(0x0000A8A600C85634 AS DateTime), 1, CAST(0x0000A8A700000000 AS DateTime), 11, 2, 1, N'NAN/VST/IP-1/18-19', NULL, NULL, CAST(0x0000A8A700000000 AS DateTime), NULL, N'IP-2', 5, 2, NULL, NULL)
+INSERT [dbo].[PatientVisit] ([VISITID], [UID], [POSTDT], [BRANCHID], [VISITDT], [PERSONID], [VSTTYPEID], [STATUSID], [VISITNO], [METDR1], [FIRSTDRID], [VISITDOA], [VISITDOD], [opipref], [booksubtypeid], [vstSubTypeId], [surgerydt], [revisityn]) VALUES (2, 1, CAST(0x0000A8A600D030E0 AS DateTime), 1, CAST(0x0000A8A600D030E0 AS DateTime), 20, 2, 1, N'NAN/VST/IP-2/18-19', N'Y', 1, CAST(0x0000A8A600D030E0 AS DateTime), NULL, N'IP-3', NULL, NULL, NULL, N'N')
+INSERT [dbo].[PatientVisit] ([VISITID], [UID], [POSTDT], [BRANCHID], [VISITDT], [PERSONID], [VSTTYPEID], [STATUSID], [VISITNO], [METDR1], [FIRSTDRID], [VISITDOA], [VISITDOD], [opipref], [booksubtypeid], [vstSubTypeId], [surgerydt], [revisityn]) VALUES (3, 1, CAST(0x0000A8A600D07730 AS DateTime), 1, CAST(0x0000A8A600D07730 AS DateTime), 21, 2, 1, N'NAN/VST/IP-3/18-19', N'Y', 1, CAST(0x0000A8A600D07730 AS DateTime), NULL, N'IP-4', NULL, NULL, NULL, N'N')
+INSERT [dbo].[PatientVisit] ([VISITID], [UID], [POSTDT], [BRANCHID], [VISITDT], [PERSONID], [VSTTYPEID], [STATUSID], [VISITNO], [METDR1], [FIRSTDRID], [VISITDOA], [VISITDOD], [opipref], [booksubtypeid], [vstSubTypeId], [surgerydt], [revisityn]) VALUES (4, 1, CAST(0x0000A8A600D0BD80 AS DateTime), 1, CAST(0x0000A8A600D0BD80 AS DateTime), 22, 1, 1, N'NAN/VST/OP-1/18-19', N'Y', 5, CAST(0x0000A8A600D0BD80 AS DateTime), NULL, N'OP-11', NULL, NULL, NULL, N'N')
+INSERT [dbo].[PatientVisit] ([VISITID], [UID], [POSTDT], [BRANCHID], [VISITDT], [PERSONID], [VSTTYPEID], [STATUSID], [VISITNO], [METDR1], [FIRSTDRID], [VISITDOA], [VISITDOD], [opipref], [booksubtypeid], [vstSubTypeId], [surgerydt], [revisityn]) VALUES (5, 1, CAST(0x0000A8A600D209F0 AS DateTime), 1, CAST(0x0000A8A600000000 AS DateTime), 23, 1, 1, N'NAN/VST/OP-2/18-19', NULL, NULL, CAST(0x0000A8A600000000 AS DateTime), NULL, N'OP-12', 1, 1, NULL, NULL)
+SET IDENTITY_INSERT [dbo].[PatientVisit] OFF
+/****** Object:  Table [dbo].[M_User]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_User](
+	[Uid] [int] IDENTITY(1,1) NOT NULL,
+	[statusid] [int] NULL,
+	[createdby] [int] NULL,
+	[Usrnm] [varchar](30) NULL,
+	[upwd] [varchar](25) NULL,
+	[postdt] [datetime] NULL,
+	[lastLoginOk] [datetime] NULL,
+	[lastLoginfail] [datetime] NULL,
+	[lastlogoff] [datetime] NULL,
+	[lastpwdreset] [datetime] NULL,
+	[presentLogin] [datetime] NULL,
+	[abnormalclose] [datetime] NULL,
+	[logincnt] [int] NULL,
+	[loginIPaddress] [varchar](50) NULL,
+	[loginSysNm] [varchar](200) NULL,
+	[pwdChangedon] [datetime] NULL,
+	[usrChkDigit
+usrChkDigit
+usrChkDigit] [varchar](10) NULL,
+	[usrChkDigit] [varchar](10) NULL,
+ CONSTRAINT [PK_M_User] PRIMARY KEY CLUSTERED 
+(
+	[Uid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_User] ON
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (1, 1, 1, N'admin', N'59566467706c715659', CAST(0x0000A19300000000 AS DateTime), NULL, NULL, NULL, NULL, CAST(0x0000A8A600D1EC6C AS DateTime), CAST(0x0000A8A600D1A42E AS DateTime), NULL, NULL, N'VSSERVER', NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (2, 1, 1, N'doctor', N'595634353637385000', CAST(0x0000A4D600000000 AS DateTime), NULL, NULL, NULL, NULL, CAST(0x0000A82F00000000 AS DateTime), CAST(0x0000A82E00000000 AS DateTime), NULL, NULL, N'LENOVO', NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (3, 1, 1, N'public', N'595634353637385000', CAST(0x0000A4D600000000 AS DateTime), NULL, NULL, NULL, NULL, CAST(0x0000A82F00000000 AS DateTime), CAST(0x0000A82E00000000 AS DateTime), NULL, NULL, N'LENOVO', NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (4, 1, 1, N'Subangi', N'595634353637385659', CAST(0x0000A8A600B35A10 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (5, 1, 1, N'Charulatha', N'595634353637385659', CAST(0x0000A8A600B47350 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (6, 1, 1, N'Kamakshi', N'595634353637385659', CAST(0x0000A8A600B4FFF0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (7, 1, 1, N'Velmurugan', N'595634353637385659', CAST(0x0000A8A600B80560 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (8, 1, 1, N'Sri Lakshmi', N'595634353637385659', CAST(0x0000A8A600B964F0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (9, 1, 1, N'Chinmayee', N'595634353637385659', CAST(0x0000A8A600BA37E0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (10, 1, 1, N'Sairam', N'595634353637385659', CAST(0x0000A8A600BBDDC0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (11, 1, 1, N'Shashank', N'595634353637385659', CAST(0x0000A8A600BCB0B0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_User] ([Uid], [statusid], [createdby], [Usrnm], [upwd], [postdt], [lastLoginOk], [lastLoginfail], [lastlogoff], [lastpwdreset], [presentLogin], [abnormalclose], [logincnt], [loginIPaddress], [loginSysNm], [pwdChangedon], [usrChkDigit
+usrChkDigit
+usrChkDigit], [usrChkDigit]) VALUES (12, 1, 1, N'Miruthula', N'595634353637385659', CAST(0x0000A8A600C115B0 AS DateTime), NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+SET IDENTITY_INSERT [dbo].[M_User] OFF
+/****** Object:  Table [dbo].[M_TimeSlot]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_TimeSlot](
+	[timeslotid] [int] IDENTITY(1,1) NOT NULL,
+	[timeslotnm] [varchar](30) NULL,
+	[slotStart] [varchar](5) NULL,
+	[slotEnd] [varchar](5) NULL,
+	[slotfor] [varchar](20) NULL,
+ CONSTRAINT [PK_M_TimeSlot] PRIMARY KEY CLUSTERED 
+(
+	[timeslotid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_TimeSlot] ON
+INSERT [dbo].[M_TimeSlot] ([timeslotid], [timeslotnm], [slotStart], [slotEnd], [slotfor]) VALUES (1, N'10:00 to 14:00', N'1000', N'1400', N'Patient')
+INSERT [dbo].[M_TimeSlot] ([timeslotid], [timeslotnm], [slotStart], [slotEnd], [slotfor]) VALUES (2, N'17:00 to 21:00', N'1700', N'2100', N'Patient')
+INSERT [dbo].[M_TimeSlot] ([timeslotid], [timeslotnm], [slotStart], [slotEnd], [slotfor]) VALUES (3, N'13:00 to 15:00', N'1300', N'1500', N'Patient')
+SET IDENTITY_INSERT [dbo].[M_TimeSlot] OFF
+/****** Object:  Table [dbo].[M_SubDepartment]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_SubDepartment](
+	[subdeptid] [int] IDENTITY(1,1) NOT NULL,
+	[deptid] [int] NULL,
+	[Uid] [int] NULL,
+	[subdeptnm] [varchar](30) NULL,
+	[postdt] [datetime] NULL,
+	[subdeptsht] [varchar](5) NULL,
+	[subdeptimg] [varchar](max) NULL,
+ CONSTRAINT [PK_M_SubDepartment] PRIMARY KEY CLUSTERED 
+(
+	[subdeptid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_SubDepartment] ON
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (1, 1, 1, N'Anaesthisiology', CAST(0x0000A0F900000000 AS DateTime), N'Anaes', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (2, 1, 1, N'Cardiiology', CAST(0x0000A0F900000000 AS DateTime), N'Cardi', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (3, 1, 1, N'Clinical Nutrition', CAST(0x0000A0F900000000 AS DateTime), N'Clini', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (4, 1, 1, N'Dental', CAST(0x0000A0F900000000 AS DateTime), N'Denta', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (5, 1, 1, N'ENT', CAST(0x0000A0F900000000 AS DateTime), N'ENT', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (6, 1, 1, N'Dermatology', CAST(0x0000A0F900000000 AS DateTime), N'Derma', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (7, 1, 1, N'Diabetology', CAST(0x0000A0F900000000 AS DateTime), N'Diabe', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (8, 1, 1, N'General Medicine', CAST(0x0000A0F900000000 AS DateTime), N'Gen', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (9, 1, 1, N'Gyenacology', CAST(0x0000A0F900000000 AS DateTime), N'Gyena', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (10, 1, 1, N'General Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Gener', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (11, 1, 1, N'Gastro Enterology', CAST(0x0000A0F900000000 AS DateTime), N'Gastr', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (12, 1, 1, N'Haematology', CAST(0x0000A0F900000000 AS DateTime), N'Haema', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (13, 1, 1, N'Laparoscopic Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Lapar', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (14, 1, 1, N'Neuro Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Neuro', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (15, 1, 1, N'Neuro Medicine', CAST(0x0000A0F900000000 AS DateTime), N'Neuro', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (16, 1, 1, N'Nephrology', CAST(0x0000A0F900000000 AS DateTime), N'Nephr', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (17, 1, 1, N'Orthopaedics', CAST(0x0000A0F900000000 AS DateTime), N'Ortho', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (18, 1, 1, N'Opthalmology', CAST(0x0000A0F900000000 AS DateTime), N'Optha', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (19, 1, 1, N'Physiotherapy', CAST(0x0000A0F900000000 AS DateTime), N'Physi', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (20, 1, 1, N'Psycology', CAST(0x0000A0F900000000 AS DateTime), N'Psyco', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (21, 1, 1, N'Pathology', CAST(0x0000A0F900000000 AS DateTime), N'Patho', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (22, 1, 1, N'Pulmonology', CAST(0x0000A0F900000000 AS DateTime), N'Pulmo', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (23, 1, 1, N'Plastic Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Plast', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (24, 1, 1, N'Psychiatry', CAST(0x0000A0F900000000 AS DateTime), N'Psych', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (25, 1, 1, N'paediatrics', CAST(0x0000A0F900000000 AS DateTime), N'paedi', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (26, 1, 1, N'Oncology', CAST(0x0000A0F900000000 AS DateTime), N'Oncol', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (27, 1, 1, N'Paediatric Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Paedi', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (28, 1, 1, N'Radiology', CAST(0x0000A0F900000000 AS DateTime), N'Radio', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (29, 1, 1, N'Rheumatology', CAST(0x0000A0F900000000 AS DateTime), N'Rheum', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (30, 1, 1, N'Sonology', CAST(0x0000A0F900000000 AS DateTime), N'Sonol', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (31, 1, 1, N'Urology', CAST(0x0000A0F900000000 AS DateTime), N'Urolo', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (32, 1, 1, N'Vascular Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Vascu', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (33, 1, 1, N'DMO''S (MBBS)', CAST(0x0000A0F900000000 AS DateTime), N'DMO''S', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (34, 1, 1, N'Cardio Thoracic Surgery', CAST(0x0000A0F900000000 AS DateTime), N'Cardi', N'')
+INSERT [dbo].[M_SubDepartment] ([subdeptid], [deptid], [Uid], [subdeptnm], [postdt], [subdeptsht], [subdeptimg]) VALUES (35, 1, 1, N'Dialysis', CAST(0x0000A0F900000000 AS DateTime), N'Dialy', N'')
+SET IDENTITY_INSERT [dbo].[M_SubDepartment] OFF
+/****** Object:  Table [dbo].[M_PersonTitle]    Script Date: 03/17/2018 13:01:35 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_PersonTitle](
+	[titleid] [int] IDENTITY(1,1) NOT NULL,
+	[titlenm] [varchar](6) NULL,
+	[titledesc] [varchar](30) NULL,
+	[statusid] [int] NULL,
+ CONSTRAINT [PK_M_PersonTitle] PRIMARY KEY CLUSTERED 
+(
+	[titleid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_PersonTitle] ON
+INSERT [dbo].[M_PersonTitle] ([titleid], [titlenm], [titledesc], [statusid]) VALUES (1, N'Mr', N'Mister', 1)
+INSERT [dbo].[M_PersonTitle] ([titleid], [titlenm], [titledesc], [statusid]) VALUES (2, N'Mrs', N'Mistress', 1)
+INSERT [dbo].[M_PersonTitle] ([titleid], [titlenm], [titledesc], [statusid]) VALUES (3, N'Miss', N'Miss', 1)
+INSERT [dbo].[M_PersonTitle] ([titleid], [titlenm], [titledesc], [statusid]) VALUES (4, N'Master', N'Master', 1)
+INSERT [dbo].[M_PersonTitle] ([titleid], [titlenm], [titledesc], [statusid]) VALUES (5, N'Dr', N'Doctor', 1)
+SET IDENTITY_INSERT [dbo].[M_PersonTitle] OFF
+/****** Object:  Table [dbo].[M_Person]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_Person](
+	[PERSONID] [bigint] IDENTITY(1,1) NOT NULL,
+	[PERSONNM] [varchar](50) NULL,
+	[HOSPITALREF] [varchar](20) NULL,
+	[REGNDT] [datetime] NULL,
+	[DOB] [datetime] NULL,
+	[AGE] [varchar](15) NULL,
+	[CELLNO] [varchar](50) NULL,
+	[EMAILID] [varchar](50) NULL,
+	[BRANCHID] [int] NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[TITLEID] [int] NULL,
+	[BGID] [int] NULL,
+	[RELIGIONID] [int] NULL,
+	[GENDERID] [int] NULL,
+	[STATUSID] [int] NULL,
+	[VSTACTIVE] [char](1) NULL CONSTRAINT [DF_M_Person_vstActive]  DEFAULT ('N'),
+	[ACTVISITID] [bigint] NULL,
+	[DUEAMOUNT] [numeric](12, 2) NULL,
+	[MARITALID] [int] NULL,
+	[SPOUSENM] [varchar](50) NULL,
+	[OCCUPATION] [varchar](50) NULL,
+	[ANNUALINCOME] [varchar](10) NULL,
+	[REFACTUALID] [int] NULL,
+	[PERSONREM] [varchar](200) NULL,
+	[coaid] [bigint] NULL,
+	[duetpa] [numeric](12, 2) NULL,
+	[aadharno] [varchar](20) NULL,
+	[igstcustomer] [char](1) NULL CONSTRAINT [DF_M_Person_igstcustomer]  DEFAULT ('N'),
+	[secondmobileno] [nvarchar](20) NULL,
+	[patientpwd] [nvarchar](100) NULL,
+ CONSTRAINT [PK_M_Person] PRIMARY KEY CLUSTERED 
+(
+	[PERSONID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_Person] ON
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (1, N'Doctor', N'', CAST(0x0000A4D600000000 AS DateTime), CAST(0x0000660F00000000 AS DateTime), N'44', N'1', N'', 1, 1, CAST(0x0000A4D600000000 AS DateTime), 5, 0, 0, 1, 1, N'N', NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, 47, CAST(0.00 AS Numeric(12, 2)), NULL, NULL, NULL, NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (2, N'Subangi', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00006F9400000000 AS DateTime), N'40', N'9999999990', N'', 1, 1, CAST(0x0000A8A600B313C0 AS DateTime), 5, 0, 0, 2, 1, N'N', NULL, NULL, 0, N'', N'', N'', 1, N'', 56, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (3, N'Charulatha', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000076B600000000 AS DateTime), N'35', N'9898989898', N'', 1, 1, CAST(0x0000A8A600B42D00 AS DateTime), 5, 0, 1, 1, 1, N'N', NULL, NULL, 1, N'Velmurugan', N'', N'', 1, N'', 57, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (4, N'Kamakshi', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000659700000000 AS DateTime), N'47', N'9797979797', N'', 1, 1, CAST(0x0000A8A600B4B9A0 AS DateTime), 5, 0, 1, 2, 1, N'N', NULL, NULL, 1, N'Dr. Siva', N'', N'', 1, N'', 58, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (5, N'Velmurugan', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000062BD00000000 AS DateTime), N'49', N'9696969696', N'', 1, 1, CAST(0x0000A8A600B7BF10 AS DateTime), 5, 3, 1, 1, 1, N'N', NULL, NULL, 1, N'Dr. Charulatha', N'', N'', 1, N'', 59, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (6, N'Sri Lakshmi', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00007DD900000000 AS DateTime), N'30', N'9595959595', N'', 1, 1, CAST(0x0000A8A600B8D850 AS DateTime), 5, 0, 1, 2, 1, N'N', NULL, NULL, 1, N'Dr.Karthik', N'', N'', 1, N'', 60, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (7, N'Chinmayee', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000076B600000000 AS DateTime), N'35', N'9494949494', N'', 1, 1, CAST(0x0000A8A600B9F190 AS DateTime), 5, 0, 1, 1, 1, N'N', NULL, NULL, 1, N'Dr. Venkat', N'', N'', 1, N'', 61, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (8, N'Sairam', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000080B300000000 AS DateTime), N'28', N'9393939393', N'', 1, 1, CAST(0x0000A8A600BB5120 AS DateTime), 5, 7, 1, 1, 1, N'N', NULL, NULL, 1, N'Dr. Mathangi', N'', N'', 1, N'', 62, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (9, N'Shashank', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00007AFE00000000 AS DateTime), N'32', N'9292929292', N'', 1, 1, CAST(0x0000A8A600BC6A60 AS DateTime), 5, 0, 1, 1, 1, N'N', NULL, NULL, 1, N'Dr. Miruthula', N'', N'', 1, N'', 63, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (10, N'Miruthula', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00006F9400000000 AS DateTime), N'40', N'9191919191', N'', 1, 1, CAST(0x0000A8A600C08910 AS DateTime), 5, 0, 1, 1, 1, N'N', NULL, NULL, 1, N'Dr. Shashank', N'', N'', 1, N'', 64, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (11, N'Karuna', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00006F9400000000 AS DateTime), N'40', N'9966339966', N'', 1, 1, CAST(0x0000A8A600C4A7C0 AS DateTime), 2, 0, 1, 2, 1, N'Y', 1, NULL, 1, N'Mallika', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (12, N'Suganthi', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000615000000000 AS DateTime), N'50', N'98798798578', N'', 1, 1, CAST(0x0000A8A600C839D0 AS DateTime), 2, 0, 1, 2, 1, N'N', NULL, NULL, 1, N'Sugan', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (13, N'Saravanan', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000062BD00000000 AS DateTime), N'49', N'9519519519', N'', 1, 1, CAST(0x0000A8A600C90CC0 AS DateTime), 1, 7, 1, 1, 1, N'N', NULL, NULL, 1, N'Priya', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (14, N'Kirupakar', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000782400000000 AS DateTime), N'34', N'7537537537', N'', 1, 1, CAST(0x0000A8A600CA2600 AS DateTime), 1, 7, 1, 1, 1, N'N', NULL, NULL, 1, N'Kirupalini', N'', N'', 4, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (15, N'Kaliammal', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000670500000000 AS DateTime), N'46', N'9658965890', N'', 1, 1, CAST(0x0000A8A600CC9ED0 AS DateTime), 2, 2, 1, 2, 1, N'N', NULL, NULL, 1, N'Kaliappan', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (16, N'Muniappan', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00006B4C00000000 AS DateTime), N'43', N'8745874596', N'', 1, 1, CAST(0x0000A8A600CD71C0 AS DateTime), 1, 5, 1, 1, 1, N'N', NULL, NULL, 1, N'Muniammal', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (17, N'Rajasekar', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000076B600000000 AS DateTime), N'35', N'9456456780', N'', 1, 1, CAST(0x0000A8A600CE8B00 AS DateTime), 1, 4, 1, 1, 1, N'N', NULL, NULL, 1, N'Rajam', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (18, N'Sathyan', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000642A00000000 AS DateTime), N'48', N'9258258258', N'', 1, 1, CAST(0x0000A8A600CF17A0 AS DateTime), 1, 8, 1, 1, 1, N'N', NULL, NULL, 1, N'Sathya', N'', N'', 6, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (19, N'Polammal', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x000062BD00000000 AS DateTime), N'49', N'9321932199', N'', 1, 1, CAST(0x0000A8A600CFA440 AS DateTime), 2, 3, 1, 2, 1, N'N', NULL, NULL, 1, N'Koniappan', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (20, N'sasa', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000687200000000 AS DateTime), N'45', N'7654756', N'', 1, 1, CAST(0x0000A8A600D030E0 AS DateTime), 2, 0, 0, 2, 1, N'Y', 2, NULL, 0, N'', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (21, N'ammu', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x0000547800000000 AS DateTime), N'59', N'976857', N'', 1, 1, CAST(0x0000A8A600D07730 AS DateTime), 2, 0, 0, 2, 1, N'Y', 3, NULL, 0, N'', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (22, N'Velraj', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00002F6000000000 AS DateTime), N'85', N'7876', N'', 1, 1, CAST(0x0000A8A600D0BD80 AS DateTime), 1, 0, 0, 1, 1, N'Y', 4, NULL, 0, N'', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (23, N'Rohan', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00006F9400000000 AS DateTime), N'40', N'9147147147', N'', 1, 1, CAST(0x0000A8A600D07730 AS DateTime), 1, 7, 2, 1, 1, N'Y', 5, NULL, 1, N'Roshini', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+INSERT [dbo].[M_Person] ([PERSONID], [PERSONNM], [HOSPITALREF], [REGNDT], [DOB], [AGE], [CELLNO], [EMAILID], [BRANCHID], [UID], [POSTDT], [TITLEID], [BGID], [RELIGIONID], [GENDERID], [STATUSID], [VSTACTIVE], [ACTVISITID], [DUEAMOUNT], [MARITALID], [SPOUSENM], [OCCUPATION], [ANNUALINCOME], [REFACTUALID], [PERSONREM], [coaid], [duetpa], [aadharno], [igstcustomer], [secondmobileno], [patientpwd]) VALUES (24, N'Bobby', N'', CAST(0x0000A8A600000000 AS DateTime), CAST(0x00003F1200000000 AS DateTime), N'74', N'9639879741', N'', 1, 1, CAST(0x0000A8A600D21D10 AS DateTime), 2, 8, 2, 2, 1, N'N', NULL, NULL, 1, N'Bose', N'', N'', 1, N'', -1, NULL, N'', N'N', N'', NULL)
+SET IDENTITY_INSERT [dbo].[M_Person] OFF
+/****** Object:  Table [dbo].[M_Gender]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_Gender](
+	[genderid] [int] IDENTITY(1,1) NOT NULL,
+	[gendernm] [varchar](15) NULL,
+ CONSTRAINT [PK_M_Gender] PRIMARY KEY CLUSTERED 
+(
+	[genderid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_Gender] ON
+INSERT [dbo].[M_Gender] ([genderid], [gendernm]) VALUES (1, N'Male')
+INSERT [dbo].[M_Gender] ([genderid], [gendernm]) VALUES (2, N'Female')
+INSERT [dbo].[M_Gender] ([genderid], [gendernm]) VALUES (3, N'Other')
+SET IDENTITY_INSERT [dbo].[M_Gender] OFF
+/****** Object:  Table [dbo].[M_Doctor]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_Doctor](
+	[DRID] [int] IDENTITY(1,1) NOT NULL,
+	[GOVREGNNO] [varchar](40) NULL,
+	[GOVREGNDT] [datetime] NULL,
+	[QUALIFICATION] [varchar](100) NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[PERSONID] [bigint] NULL,
+	[DRCHG] [int] NULL,
+	[DRUSRID] [int] NULL,
+	[CANEDITRATE] [char](1) NULL,
+	[TIMEPERPATIENT] [int] NULL,
+	[DRTYPE] [char](1) NULL,
+	[drhospchg] [numeric](11, 2) NULL,
+	[drhosppercent] [numeric](6, 2) NULL,
+	[DrPercent] [numeric](6, 2) NULL,
+ CONSTRAINT [PK_M_Doctor] PRIMARY KEY CLUSTERED 
+(
+	[DRID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_Doctor] ON
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (1, N'', NULL, N'', 1, CAST(0x0000A4D6007E1310 AS DateTime), 1, 200, 2, N'N', 5, N'S', CAST(50.00 AS Numeric(11, 2)), NULL, NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (2, N'', NULL, N'', 1, CAST(0x0000A8A600B371A3 AS DateTime), 2, 500, 4, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (3, N'', NULL, N'', 1, CAST(0x0000A8A600B499C1 AS DateTime), 3, 500, 5, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (4, N'', NULL, N'', 1, CAST(0x0000A8A600B5451C AS DateTime), 4, 500, 6, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (5, N'', NULL, N'', 1, CAST(0x0000A8A600B845A9 AS DateTime), 5, 500, 7, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (6, N'', NULL, N'', 1, CAST(0x0000A8A600B9720B AS DateTime), 6, 500, 8, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (7, N'', NULL, N'', 1, CAST(0x0000A8A600BA64A8 AS DateTime), 7, 500, 9, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (8, N'', NULL, N'', 1, CAST(0x0000A8A600BBF353 AS DateTime), 8, 500, 10, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (9, N'', NULL, N'', 1, CAST(0x0000A8A600BCCB7F AS DateTime), 9, 500, 11, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+INSERT [dbo].[M_Doctor] ([DRID], [GOVREGNNO], [GOVREGNDT], [QUALIFICATION], [UID], [POSTDT], [PERSONID], [DRCHG], [DRUSRID], [CANEDITRATE], [TIMEPERPATIENT], [DRTYPE], [drhospchg], [drhosppercent], [DrPercent]) VALUES (10, N'', NULL, N'', 1, CAST(0x0000A8A600C13C1A AS DateTime), 10, 500, 12, N'N', 5, N'S', CAST(1000.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)), NULL)
+SET IDENTITY_INSERT [dbo].[M_Doctor] OFF
+/****** Object:  Table [dbo].[M_Branch]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[M_Branch](
+	[branchid] [int] IDENTITY(1,1) NOT NULL,
+	[branchcd] [varchar](5) NULL,
+	[branchnm] [varchar](60) NULL,
+	[listnm] [varchar](40) NULL,
+	[branchaddress] [varchar](500) NULL,
+	[branchshrt] [varchar](4) NULL,
+	[parmanm] [nvarchar](100) NULL,
+	[nextregnno] [bigint] NULL,
+	[branchMobile] [varchar](100) NULL,
+	[brnxtopno] [bigint] NULL,
+	[brnxtipno] [bigint] NULL,
+ CONSTRAINT [PK_M_Branch] PRIMARY KEY CLUSTERED 
+(
+	[branchid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[M_Branch] ON
+INSERT [dbo].[M_Branch] ([branchid], [branchcd], [branchnm], [listnm], [branchaddress], [branchshrt], [parmanm], [nextregnno], [branchMobile], [brnxtopno], [brnxtipno]) VALUES (1, N'1', N'Vignana Solutions Demo', N'Nanganallur', N'Vignana Solutions,Nanganallur', N'NAN', N'Pharmacy', 1, N'', 13, 5)
+INSERT [dbo].[M_Branch] ([branchid], [branchcd], [branchnm], [listnm], [branchaddress], [branchshrt], [parmanm], [nextregnno], [branchMobile], [brnxtopno], [brnxtipno]) VALUES (2, N'2', N'Vignana Solutions Demo', N'MADURAI', N'Vignana Solutions,MADURAI', N'MDUI', N'Pharmacy', 1, NULL, 13, 5)
+INSERT [dbo].[M_Branch] ([branchid], [branchcd], [branchnm], [listnm], [branchaddress], [branchshrt], [parmanm], [nextregnno], [branchMobile], [brnxtopno], [brnxtipno]) VALUES (3, N'3', N'Vignana Solutions Demo', N'Sivagangi', N'6,Majeeth Road,Sivagangai-630561', N'Siva', N'Pharmacy', 1, NULL, 13, 5)
+SET IDENTITY_INSERT [dbo].[M_Branch] OFF
+/****** Object:  Table [dbo].[DrSkill]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DrSkill](
+	[DRSKILLID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[DRID] [int] NULL,
+	[SUBDEPTID] [int] NULL,
+	[STATUSID] [int] NULL,
+	[drChg] [int] NULL,
+ CONSTRAINT [PK_DrSkill] PRIMARY KEY CLUSTERED 
+(
+	[DRSKILLID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[DrSkill] ON
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100000, 1, 1, 1, 0)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100001, 2, 7, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100002, 3, 2, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100003, 4, 6, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100004, 5, 11, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100005, 6, 14, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100006, 7, 10, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100007, 8, 35, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100008, 9, 5, 1, NULL)
+INSERT [dbo].[DrSkill] ([DRSKILLID], [DRID], [SUBDEPTID], [STATUSID], [drChg]) VALUES (100009, 10, 34, 1, NULL)
+SET IDENTITY_INSERT [dbo].[DrSkill] OFF
+/****** Object:  Table [dbo].[DrBranchFee]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DrBranchFee](
+	[drchgid] [int] IDENTITY(1,1) NOT NULL,
+	[drSkillid] [bigint] NULL,
+	[branchid] [int] NULL,
+	[drChg] [int] NULL,
+	[timePerPatient] [int] NULL,
+	[drhospchg] [numeric](11, 2) NULL,
+	[drhosppercent] [numeric](6, 2) NULL,
+ CONSTRAINT [PK_DrBranchFee] PRIMARY KEY CLUSTERED 
+(
+	[drchgid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[DrBranchFee] ON
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (1, 100001, 1, 400, 5, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (2, 100002, 1, 500, 10, CAST(150.00 AS Numeric(11, 2)), CAST(10.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (3, 100000, 1, 500, 10, CAST(150.00 AS Numeric(11, 2)), CAST(10.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (4, 100003, 1, 400, 5, CAST(150.00 AS Numeric(11, 2)), CAST(5.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (5, 100004, 2, 200, 5, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (6, 100005, 3, 350, 10, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (7, 100006, 1, 550, 5, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (8, 100007, 3, 600, 15, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (9, 100008, 1, 15, 300, CAST(150.00 AS Numeric(11, 2)), CAST(300.00 AS Numeric(6, 2)))
+INSERT [dbo].[DrBranchFee] ([drchgid], [drSkillid], [branchid], [drChg], [timePerPatient], [drhospchg], [drhosppercent]) VALUES (10, 100009, 1, 550, 10, CAST(150.00 AS Numeric(11, 2)), CAST(0.00 AS Numeric(6, 2)))
+SET IDENTITY_INSERT [dbo].[DrBranchFee] OFF
+/****** Object:  Table [dbo].[DrAvailability]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DrAvailability](
+	[DRAVILABLEID] [bigint] IDENTITY(100000,1) NOT NULL,
+	[drchgid] [bigint] NULL,
+	[WEEKDAYID] [int] NULL,
+	[TIMESLOTID] [int] NULL,
+	[STATUSID] [int] NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+ CONSTRAINT [PK_DrAvailability] PRIMARY KEY CLUSTERED 
+(
+	[DRAVILABLEID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET IDENTITY_INSERT [dbo].[DrAvailability] ON
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100000, 1, 1, 0, 1, 1, CAST(0x0000A8A600B4091B AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100001, 2, 1, 1, 1, 1, CAST(0x0000A8A600CE48C0 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100002, 2, 4, 1, 1, 1, CAST(0x0000A8A600CE48CC AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100003, 3, 1, 1, 1, 1, CAST(0x0000A8A600B70E27 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100004, 4, 1, 1, 1, 1, CAST(0x0000A8A600CCA20B AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100005, 4, 1, 1, 1, 1, CAST(0x0000A8A600CCA218 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100006, 5, 1, 1, 1, 1, CAST(0x0000A8A600B8C57D AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100007, 6, 1, 1, 1, 1, CAST(0x0000A8A600B9BB11 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100008, 7, 1, 1, 1, 1, CAST(0x0000A8A600BAA4F3 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100009, 8, 1, 1, 1, 1, CAST(0x0000A8A600BC2EE3 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100010, 9, 1, 1, 1, 1, CAST(0x0000A8A600CE5955 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100011, 10, 1, 1, 1, 1, CAST(0x0000A8A600C20D53 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100012, 4, 4, 2, 1, 1, CAST(0x0000A8A600CCA222 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100013, 4, 3, 1, 1, 1, CAST(0x0000A8A600CCA22C AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100014, 4, 6, 2, 1, 1, CAST(0x0000A8A600CCA236 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100015, 2, 3, 1, 1, 1, CAST(0x0000A8A600CE48D9 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100016, 2, 5, 1, 1, 1, CAST(0x0000A8A600CE48E3 AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100017, 2, 7, 2, 1, 1, CAST(0x0000A8A600CE48ED AS DateTime))
+INSERT [dbo].[DrAvailability] ([DRAVILABLEID], [drchgid], [WEEKDAYID], [TIMESLOTID], [STATUSID], [UID], [POSTDT]) VALUES (100018, 9, 3, 3, 1, 1, CAST(0x0000A8A600CE595F AS DateTime))
+SET IDENTITY_INSERT [dbo].[DrAvailability] OFF
+/****** Object:  Table [dbo].[DrAppointment]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DrAppointment](
+	[drappointid] [bigint] IDENTITY(1,1) NOT NULL,
+	[drappointdt] [date] NULL,
+	[drSkillid] [bigint] NULL,
+	[Personid] [bigint] NULL,
+	[tokenno] [int] NULL,
+	[tokenInTime] [varchar](5) NULL,
+	[tokenOutTime] [varchar](5) NULL,
+	[visitid] [bigint] NULL,
+	[uid] [int] NULL,
+	[tokenStatusid] [int] NULL,
+	[postdt] [date] NULL,
+	[timeslotid] [int] NULL,
+	[booksubtypeid] [int] NULL,
+	[branchid] [int] NULL,
+ CONSTRAINT [PK_DrAppointment] PRIMARY KEY CLUSTERED 
+(
+	[drappointid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[DrAppointment] ON
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (1, CAST(0x023E0B00 AS Date), 100004, 12, 1, N'12:30', N'12:30', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 3, 2)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (2, CAST(0x023E0B00 AS Date), 100005, 13, 1, N'13:00', N'13:00', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 4, 3)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (3, CAST(0x023E0B00 AS Date), 100008, 14, 1, N'12:30', N'12:30', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 2, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (4, CAST(0x043E0B00 AS Date), 100003, 13, 1, N'13:00', N'13:00', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 2, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (5, CAST(0x053E0B00 AS Date), 100003, 12, 1, N'20:00', N'20:00', NULL, 1, 6, CAST(0x013E0B00 AS Date), 2, 4, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (6, CAST(0x023E0B00 AS Date), 100007, 15, 1, N'14:00', N'14:00', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 3, 3)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (7, CAST(0x093E0B00 AS Date), 100003, 15, 1, N'13:50', N'13:50', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 4, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (8, CAST(0x023E0B00 AS Date), 100009, 16, 1, N'13:00', N'13:00', NULL, 1, 7, CAST(0x013E0B00 AS Date), 1, 3, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (9, CAST(0x023E0B00 AS Date), 100005, 17, 2, N'13:45', N'13:45', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 3, 3)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (10, CAST(0x023E0B00 AS Date), 100006, 18, 1, N'13:55', N'13:55', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 4, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (11, CAST(0x023E0B00 AS Date), 100005, 19, 3, N'13:40', N'13:40', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 3, 3)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (12, CAST(0x063E0B00 AS Date), 100002, 21, 1, N'13:00', N'13:00', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 2, 1)
+INSERT [dbo].[DrAppointment] ([drappointid], [drappointdt], [drSkillid], [Personid], [tokenno], [tokenInTime], [tokenOutTime], [visitid], [uid], [tokenStatusid], [postdt], [timeslotid], [booksubtypeid], [branchid]) VALUES (13, CAST(0x023E0B00 AS Date), 100009, 24, 2, N'13:30', N'13:30', NULL, 1, 6, CAST(0x013E0B00 AS Date), 1, 3, 1)
+SET IDENTITY_INSERT [dbo].[DrAppointment] OFF
+/****** Object:  Table [dbo].[DrAppointCancel]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DrAppointCancel](
+	[drappointcancelid] [bigint] IDENTITY(1,1) NOT NULL,
+	[drappointid] [bigint] NULL,
+	[Uid] [int] NULL,
+	[tokenstatusid] [int] NULL,
+	[drappointcancelrem] [varchar](500) NULL,
+ CONSTRAINT [PK_DrAppointCancel] PRIMARY KEY CLUSTERED 
+(
+	[drappointcancelid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[DrAppointCancel] ON
+INSERT [dbo].[DrAppointCancel] ([drappointcancelid], [drappointid], [Uid], [tokenstatusid], [drappointcancelrem]) VALUES (1, 8, 1, 7, N'clear')
+SET IDENTITY_INSERT [dbo].[DrAppointCancel] OFF
+/****** Object:  Table [dbo].[BookingSubType]    Script Date: 03/17/2018 13:01:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[BookingSubType](
+	[booksubtypeid] [int] IDENTITY(1,1) NOT NULL,
+	[booksubtypenm] [varchar](50) NULL,
+	[booktypeid] [int] NULL,
+	[statusid] [int] NULL,
+	[booksubtypeimg] [varchar](500) NULL,
+ CONSTRAINT [PK_BookingSubType] PRIMARY KEY CLUSTERED 
+(
+	[booksubtypeid] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[BookingSubType] ON
+INSERT [dbo].[BookingSubType] ([booksubtypeid], [booksubtypenm], [booktypeid], [statusid], [booksubtypeimg]) VALUES (1, N'Direct', 1, 1, N'~/imgs/patient.png')
+INSERT [dbo].[BookingSubType] ([booksubtypeid], [booksubtypenm], [booktypeid], [statusid], [booksubtypeimg]) VALUES (2, N'By Direct Visit', 2, 1, N'~/imgs/patient.png')
+INSERT [dbo].[BookingSubType] ([booksubtypeid], [booksubtypenm], [booktypeid], [statusid], [booksubtypeimg]) VALUES (3, N'By Tele Call', 2, 1, N'~/imgs/telephone.png')
+INSERT [dbo].[BookingSubType] ([booksubtypeid], [booksubtypenm], [booktypeid], [statusid], [booksubtypeimg]) VALUES (4, N'By Mobile App', 2, 1, N'~/imgs/mobile.png')
+INSERT [dbo].[BookingSubType] ([booksubtypeid], [booksubtypenm], [booktypeid], [statusid], [booksubtypeimg]) VALUES (5, N'Appointment', 1, 1, N'~/imgs/patient.png')
+SET IDENTITY_INSERT [dbo].[BookingSubType] OFF
+/****** Object:  Table [dbo].[AllocateDr]    Script Date: 03/17/2018 13:01:33 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[AllocateDr](
+	[ALLOCATEID] [bigint] IDENTITY(1,1) NOT NULL,
+	[DRSKILLID] [bigint] NULL,
+	[TOKENNO] [int] NULL,
+	[TIMESLOTID] [int] NULL,
+	[DIAGID] [bigint] NULL,
+	[VISITID] [bigint] NULL,
+	[TOKENSTATUSID] [int] NULL,
+	[UID] [int] NULL,
+	[POSTDT] [datetime] NULL,
+	[TOKENINTIME] [varchar](5) NULL,
+	[TOKENOUTTIME] [varchar](5) NULL,
+	[receiptid] [bigint] NULL,
+	[patientprefertime] [varchar](5) NULL,
+ CONSTRAINT [PK_AllocateDr] PRIMARY KEY CLUSTERED 
+(
+	[ALLOCATEID] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[AllocateDr] ON
+INSERT [dbo].[AllocateDr] ([ALLOCATEID], [DRSKILLID], [TOKENNO], [TIMESLOTID], [DIAGID], [VISITID], [TOKENSTATUSID], [UID], [POSTDT], [TOKENINTIME], [TOKENOUTTIME], [receiptid], [patientprefertime]) VALUES (1, 100002, 1, 1, 1, 1, 1, 1, CAST(0x0000A8A600C85634 AS DateTime), N'1001', N'1005', NULL, NULL)
+INSERT [dbo].[AllocateDr] ([ALLOCATEID], [DRSKILLID], [TOKENNO], [TIMESLOTID], [DIAGID], [VISITID], [TOKENSTATUSID], [UID], [POSTDT], [TOKENINTIME], [TOKENOUTTIME], [receiptid], [patientprefertime]) VALUES (2, 100000, 1, 3, 1, 2, 2, 1, CAST(0x0000A8A600D030E0 AS DateTime), N'1301', N'1305', NULL, NULL)
+INSERT [dbo].[AllocateDr] ([ALLOCATEID], [DRSKILLID], [TOKENNO], [TIMESLOTID], [DIAGID], [VISITID], [TOKENSTATUSID], [UID], [POSTDT], [TOKENINTIME], [TOKENOUTTIME], [receiptid], [patientprefertime]) VALUES (3, 100000, 2, 3, 1, 3, 2, 1, CAST(0x0000A8A600D07730 AS DateTime), N'1306', N'1310', NULL, NULL)
+INSERT [dbo].[AllocateDr] ([ALLOCATEID], [DRSKILLID], [TOKENNO], [TIMESLOTID], [DIAGID], [VISITID], [TOKENSTATUSID], [UID], [POSTDT], [TOKENINTIME], [TOKENOUTTIME], [receiptid], [patientprefertime]) VALUES (4, 100004, 1, 3, 1, 4, 2, 1, CAST(0x0000A8A600D0BD80 AS DateTime), N'1301', N'1305', NULL, NULL)
+INSERT [dbo].[AllocateDr] ([ALLOCATEID], [DRSKILLID], [TOKENNO], [TIMESLOTID], [DIAGID], [VISITID], [TOKENSTATUSID], [UID], [POSTDT], [TOKENINTIME], [TOKENOUTTIME], [receiptid], [patientprefertime]) VALUES (5, 100002, 1, 2, 1, 5, 1, 1, CAST(0x0000A8A600D209F0 AS DateTime), N'1701', N'1705', NULL, NULL)
+SET IDENTITY_INSERT [dbo].[AllocateDr] OFF

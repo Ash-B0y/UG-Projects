@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory name="">
+  <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@10.123.79.59:1521:georli04</property>
+  <property name="hibernate.connection.username">T794980</property>
+  <property name="hibernate.connection.password">T794980</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  <mapping class="entity.SessionEntity"/>
+  <mapping class="entity.PackageEntity"/>
+  <mapping class="entity.UserEntity"/>
+ </session-factory>
+</hibernate-configuration>

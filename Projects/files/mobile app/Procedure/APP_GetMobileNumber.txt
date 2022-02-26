@@ -1,0 +1,6 @@
+create proc APP_GetMobileNumber
+@Mobileno varchar(50)
+as
+begin
+select * from M_Person where CELLNO=@Mobileno or secondmobileno=@Mobileno
+end

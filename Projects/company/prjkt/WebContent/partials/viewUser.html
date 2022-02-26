@@ -1,0 +1,89 @@
+
+<div class="container first" " ng-init="user.getUser()">
+	<!-- 		<div class="row"> -->
+	<!-- 			<button type="submit" ng-click="user.getUser()">Click here -->
+	<!-- 				to get all users</button> -->
+	<!-- 		</div> -->
+	<div class="row" style="padding-top: 30px">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" style="background-color: white">
+			<div class="table-responsive">
+				<table ng-if="userData" id="customers">
+					<thead>
+						<tr id="1">
+							<td>MAC ID</td>
+							<td>Customer Name</td>
+							<td>Contact No</td>
+							<td>Address</td>
+							<td>Email ID</td>
+							<td>Plan</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="row in userData">
+							<td>{{row.mac}}</td>
+							<td><span class="cusName" ng-click="userClick($event)">{{row.fullName}}</span></td>
+							<td>{{row.contactNo}}</td>
+							<td>{{row.address}}</td>
+							<td>{{row.emailId}}</td>
+							<td>{{row.packages}}</td>
+
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+			<div ng-if="userErrorMessage" style="background-color: white">{{userErrorMessage}}</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row" style="padding-top: 30px">
+		<div class="col-md-2"></div>
+		<div class="col-md-8" style="background-color: white">
+			<div class="table-responsive">
+
+				<div ng-if="myVar">
+					<div ng-repeat="i in userData|filter:{fullName:myVar}:true">
+						<form ng-submit="updateUser(i.mac)">
+							<div class="form-group">
+								<label>Customer Name</label> <input type="text" id="fname"
+									value="{{i.fullName}}" class="form-control" required="required">
+							</div>
+							<div class="form-group">
+								<label>Contact No</label> <input type="text" id="contactno"
+									value="{{i.contactNo}}" class="form-control"
+									required="required">
+							</div>
+							<div class="form-group">
+								<label>Location</label> <input type="text" id="location"
+									value="{{i.address}}" class="form-control" required="required">
+							</div>
+							<div class="form-group">
+								<label>Email ID</label> <input type="text" id="email"
+									value="{{i.emailId}}" class="form-control" required="required">
+							</div>
+							<div class="form-group">
+								<label>Available Plans</label> <select class="form-control"
+									id="plan" required="required">
+									<option value="">---Select---</option>
+									<option value="MomNDad">MomNDad</option>
+									<option value="SocialTeen">SocialTeen</option>
+									<option value="VideoMate">VideoMate</option>
+									<option value="TorrentGuy">TorrentGuy</option>
+								</select>
+							</div>
+							<input type="submit" value="submit">
+						</form>
+						<div ng-if="userUpdate.message">{{userUpdate.message}}</div>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>

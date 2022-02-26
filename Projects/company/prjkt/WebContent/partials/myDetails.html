@@ -1,0 +1,40 @@
+
+<link rel="stylesheet" type="text/css" href="../css/customertemp.css" />
+<div ng-init="myDetails()">
+
+	<div ng-if="userDetails" class="container second col">
+		<div style="font-size: large;">
+			<div>
+				<h2 class="lineleft">My Details</h2>
+				<img class="imgclass" src="../img/empty_user_icon_256.v2.png">
+			</div>
+			<form align="left" style="padding-left: 220px">
+				<div class="form-inline">
+					<label class="lineleft"> Name:</label><span
+						ng-bind="userDetails.fullName"></span>
+				</div>
+				<div class="form-inline">
+					<label class="lineleft">UserName:</label><span
+						ng-bind="userDetails.userName"></span>
+				</div>
+				<div class="form-inline">
+					<label class="lineleft"> Mac ID :</label><span
+						ng-bind="userDetails.mac"></span>
+				</div>
+				<div class="form-inline">
+					<label class="lineleft">Email ID :</label><span
+						ng-bind="userDetails.emailId"></span>
+				</div>
+				<div class="form-inline">
+					<label class="lineleft">Current Plan :</label><span
+						ng-bind="userDetails.packages"></span>
+				</div>
+				<div class="form-inline">
+					<label class="lineleft">Address :</label><span
+						ng-bind="userDetails.address"></span>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>

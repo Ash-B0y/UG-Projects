@@ -1,0 +1,27 @@
+select * from 	M_Branch
+select * from 	M_User
+select * from  M_PersonTitle
+select * from 	M_Person
+select * from 	S_FyDocNum
+select * from 	S_FinYear
+select * from 	M_SubDepartment
+select * from 	S_TokenNum
+select * from 	M_Doctor
+select * from 	S_VisitType
+select * from 	PatientVisit
+select * from 	AllocateDr
+select * from 	DrSkill
+select * from 	M_TimeSlot
+select * from 	S_UserLog
+select * from 	S_TokenStatus
+select * from 	PersonPhoto
+select * from 	UserBranch
+select * from 	Weekdays
+select * from 	DrAvailability
+select * from 	DrAppointment
+select * from 	BookingSubType
+select * from DrBranchFee
+select * from M_Gender
+select * from DrAppointCancel
+
+select MAX(tokenno)+1 from DrAppointment where drappointdt='2018-03-18' and drSkillid='100000' and timeslotid='3'

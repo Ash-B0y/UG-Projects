@@ -1,0 +1,9 @@
+UserBranch S_VisitType S_UserLog S_TokenStatus S_TokenNum S_FyDocNum S_FinYear M_TimeSlot M_SubDepartment M_PersonTitle M_Person M_Language M_Gender M_Doctor M_Branch DrSkill DrBranchFee DrAvailability DrAppointment DrAppointCancel Bookingtype BookingSubType AllocateDr admin stud Weekdays VisitSubType
+
+
+
+SELECT DISTINCT M_Person.PERSONNM,M_SubDepartment.subdeptnm FROM M_Person
+INNER JOIN M_Doctor ON M_Person.PERSONID=M_Doctor.PERSONID
+INNER JOIN DrSkill ON M_Doctor.DRID=DrSkill.DRID
+INNER JOIN M_SubDepartment ON DrSkill.SUBDEPTID=M_SubDepartment.subdeptid
+INNER JOIN DrBranchFee ON DrBranchFee.branchid='1'

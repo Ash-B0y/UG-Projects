@@ -1,0 +1,56 @@
+
+<div ng-init="userTable()">
+	<div ng-if="customerDetails">
+		
+		<div class="table-responsive">
+			<table class="table table-bordered" id="customers">
+				<thead>
+					<tr>
+						<td>Service Name</td>
+						<td>Billing Account No</td>
+						<td>Service User ID</td>
+						<td>Total Download Volume(MB)</td>
+						<td>Total Upload Volume(MB)</td>
+						<td>Total Volume(MB)</td>
+						<td>Chargeable Units</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{customerDetails[1].Plan}}</td>
+						<td>5001</td>
+						<td>2</td>
+
+						<td>{{customerDetails[1].totalDownload}}</td>
+						<td>{{customerDetails[1].totalUpload}}</td>
+						<td>{{customerDetails[1].total}}</td>
+						<td>{{customerDetails[1].excessCharge}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="table-responsive">
+			<table class="table table-bordered" id="customers">
+				<thead>
+					<tr>
+						<td>Transcation Start Date</td>
+						<td>Transcation End Date</td>
+						<td>Upload(MB)</td>
+						<td>Download(MB)</td>
+						<td>Total Units(MB)</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="row in customerDetails[0]">
+					<td>{{row.startDate}}</td>
+					<td>{{row.endDate}}</td>
+					<td>{{row.upload}}</td>
+					<td>{{row.download}}</td>
+					<td>{{row.total}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div ng-if="customerErrorMessage">{{customerErrorMessage}}</div>
+</div>

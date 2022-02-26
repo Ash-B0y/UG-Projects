@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<body  style="background-color:#b0c4de">
+<h3 style="text-align:center"><i>NEWS FEED</i>
+<br>
+<br>
+<img src="news.jpg"height="195px"></img>
+<img src="news1.jpg"></img>
+<img src="news2.jpg"></img>
+<br>
+<br>
+<p>Water was discovered on Mars recently</p>
+<button onclick="myFunction()">Show more</button>
+
+<p id="demo"></p>
+
+<script>
+var i=0;
+function myFunction() {
+
+var a=["Plymouth University is the largest university in the South West of England, with over 32,000 students and is 9th largest in the United Kingdom by total number of students.",
+"The Chief Guest of the KCT Graduation 2014 Session 1 will be Dr. K. Balveera Reddy, Former Vice Chacellor of Visvesvaraya Technological University,Belgaum,Karnataka,India.",
+"Good Potential for Technical Textiles in India - Shashi Sing, Executive Director, Indian Technical Textile Association.",
+"The Institution had entered into a strategic partnership with the Czech Republic and that would change the way textiles were manufactured in Coimbatore- Shri Shankar Vanavarayar, Joint Correspondent"];
+
+if(i<4){
+    document.getElementById("demo").innerHTML = a[i++];}
+else
+{
+    document.getElementById("demo").innerHTML ="That's it for Today:)";
+    i=0;
+}
+}
+
+</script>	
+</body>
+</html>

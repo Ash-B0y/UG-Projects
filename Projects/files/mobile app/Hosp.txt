@@ -1,0 +1,2 @@
+R.drawable.sec,abc,stu
+R.drawable.sec1,xyz,mno

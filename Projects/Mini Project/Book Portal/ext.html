@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<title>Extras</title>
+<head>
+<script>
+function load()
+{
+var x=document.getElementById('sem').value;
+ switch(x)
+{
+case "Series":
+location.href="series.html";
+break;
+case "Selfhelp":
+location.href="help.html";
+break;
+case "Most popular":
+location.href="mp.html";
+break;
+
+
+}
+
+}
+</script>
+</head>
+<body  style="background-color:lightgrey">
+<center>
+<h1>Most Popular books</h1>
+<p><i>Select Your Choice:</i>
+<select name="dept" Id="sem">
+    <option value="Series">Series</option>
+    <option value="Selfhelp">Selfhelp</option>
+    <option value="Most popular">Most popular</option>
+   
+
+</select>
+<br><br><input type="submit" onClick=load() value="Next">
+</form>
+</center>
+</body>
+</html>

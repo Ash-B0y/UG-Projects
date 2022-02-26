@@ -1,0 +1,73 @@
+import Family
+
+
+class Initializer:
+    @staticmethod
+    def create():
+        # Object creation along with family tree modelling
+        king_shan = Family.Family("Shan", "Male")
+        queen_anga = Family.Family("Anga", "Female")
+        chit = Family.Family("Chit", "Male", king_shan, queen_anga)
+        ish = Family.Family("Ish", "Male", king_shan, queen_anga)
+        vich = Family.Family("Vich", "Male", king_shan, queen_anga)
+        aras = Family.Family("Aras", "Male", king_shan, queen_anga)
+        satya = Family.Family("Satya", "Female", king_shan, queen_anga)
+        amba = Family.Family("Amba", "Female")
+        lika = Family.Family("Lika", "Female")
+        chitra = Family.Family("Chitra", "Female")
+        vyan = Family.Family("Vyan", "Male")
+
+        king_shan.set_spouse(queen_anga).set_children([chit, ish, vich, aras, satya])
+        queen_anga.set_spouse(king_shan).set_children([chit, ish, vich, aras, satya])
+
+        dritha = Family.Family("Dritha", "Female", chit, amba)
+        jaya = Family.Family("Jaya", "Male")
+        tritha = Family.Family("Tritha", "Female", chit, amba)
+        vritha = Family.Family("Vritha", "Male", chit, amba)
+        vila = Family.Family("Vila", "Female", vich, lika)
+        chika = Family.Family("Chika", "Female", vich, lika)
+        jnki = Family.Family("Jnki", "Female", aras, chitra)
+        arit = Family.Family("Arit", "Male")
+        ahit = Family.Family("Ahit", "Male", aras, chitra)
+        asva = Family.Family("Asva", "Male", vyan, satya)
+        satvy = Family.Family("Satvy", "Female")
+        vyas = Family.Family("Vyas", "Male", vyan, satya)
+        krpi = Family.Family("Krpi", "Female")
+        atya = Family.Family("Atya", "Female", vyan, satya)
+
+        chit.set_spouse(amba).set_siblings([ish, vich, aras, satya]).set_children([dritha, tritha, vritha])
+        amba.set_spouse(chit).set_children([dritha, tritha, vritha])
+        ish.set_siblings([chit, vich, aras, satya])
+        vich.set_spouse(lika).set_siblings([chit, ish, aras, satya]).set_children([vila, chika])
+        lika.set_spouse(vich).set_children([vila, chika])
+        aras.set_spouse(chitra).set_siblings([chit, ish, vich, satya]).set_children([jnki, ahit])
+        chitra.set_spouse(aras).set_children([jnki, ahit])
+        satya.set_spouse(vyan).set_siblings([chit, ish, vich, aras]).set_children([asva, vyas, atya])
+        vyan.set_spouse(satya).set_children([asva, vyas, atya])
+
+        yodhan = Family.Family("Yodhan", "Male", jaya, dritha)
+        laki = Family.Family("Laki", "Male", arit, jnki)
+        lavnya = Family.Family("Lavnya", "Female", arit, jnki)
+        vasa = Family.Family("Vasa", "Male", asva, satvy)
+        kriya = Family.Family("Kriya", "Male", vyas, krpi)
+        krithi = Family.Family("Krithi", "Female", vyas, krpi)
+
+        dritha.set_spouse(jaya).set_siblings([tritha, vritha]).set_children([yodhan])
+        jaya.set_spouse(dritha).set_children([yodhan])
+        tritha.set_siblings([dritha, vritha])
+        vritha.set_siblings([dritha, tritha])
+        vila.set_siblings([chika])
+        chika.set_siblings([vila])
+        jnki.set_spouse(arit).set_siblings([ahit]).set_children([laki, lavnya])
+        arit.set_spouse(jnki).set_children([laki, lavnya])
+        ahit.set_siblings([jnki])
+        asva.set_spouse(satvy).set_siblings([vyas, atya]).set_children([vasa])
+        satvy.set_spouse(asva).set_children([vasa])
+        vyas.set_spouse(krpi).set_siblings([asva, atya]).set_children([kriya, krithi])
+        krpi.set_spouse(vyas).set_children([kriya, krithi])
+        atya.set_siblings([asva, vyas])
+
+        laki.set_siblings([lavnya])
+        lavnya.set_siblings([laki])
+        kriya.set_siblings([krithi])
+        krithi.set_siblings([kriya])

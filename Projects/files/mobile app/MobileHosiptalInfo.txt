@@ -1,0 +1,18 @@
+CREATE proc MobileHosiptalInfo   --Insert Query  
+@mobileno varchar(50),  
+@name nvarchar(100),  
+@genderid int,  
+@age int,  
+@doctorid bigint,  
+@appointdt datetime,  
+@timeslotid int  
+as  
+begin  
+declare @dt int  
+declare @dob datetime  
+set @dt=@age  
+set @dob='SELECT DateAdd(yy, -@dt, GetDate())'  
+insert into M_Person(CELLNO,PERSONNM,GENDERID,AGE,DOB)values(@mobileno,@name,@genderid,@age,@dob)  
+insert into DrAppointment(drappointdt,drSkillid,timeslotid)values(@appointdt,@doctorid,@timeslotid)  
+  
+end  

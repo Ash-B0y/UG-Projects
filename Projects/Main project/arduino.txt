@@ -1,0 +1,482 @@
+#include <LiquidCrystal.h>
+#include <EEPROM.h>
+#include <string.h>
+char card1[13]="08009565C3";
+char card2[13]="080095743D";
+char card3[13]="0800954E1E";
+LiquidCrystal lcd(A1,A2,10,9,8,A0);
+int user[13],p,set_key=1,num,enter_key;
+unsigned int E;
+const int relay1=13;
+const int relay2=7;
+const int relay3=12;
+const int relay4=11;
+const int Set=2;
+const int mov=3;
+const int inc=4;
+const int dec=5;
+const int ent=6;
+char rec[13],index;
+unsigned char set_value;
+void mydecimal(unsigned int val,char pos,char j)
+{
+unsigned int Lcd_h,Lcd_hr,Lcd_t,Lcd_o;
+Lcd_h=val/100;
+Lcd_hr=val%100;
+Lcd_t=Lcd_hr/10;
+Lcd_o=Lcd_hr%10;
+lcd.setCursor(0+pos,j);
+lcd.write(Lcd_h+0x30);
+lcd.setCursor(1+pos,j);
+lcd.write(Lcd_t+0x30);
+lcd.setCursor(2+pos,j);
+lcd.write(Lcd_o+0x30);
+}
+void Lcd8_Decimal3(unsigned char val)
+{
+unsigned int Lcd_h,Lcd_hr,Lcd_t,Lcd_o;
+Lcd_h=val/100;
+Lcd_hr=val%100;
+Lcd_t=Lcd_hr/10;
+Lcd_o=Lcd_hr%10;
+Serial.print(Lcd_h);
+Serial.print(Lcd_t);
+Serial.print(Lcd_o);
+}
+void scan()
+{
+if(set_key==1)
+{
+if(digitalRead(inc)==0)
+{
+delay(20);
+while(digitalRead(inc)==0);
+num=(user[p])+1;
+if(num<=0) num=0;
+if(num>=9) num=9;
+43
+user[p]=num;
+lcd.setCursor(12+p,1);
+lcd.print(num);
+lcd.setCursor(12+p,1);
+}
+if(digitalRead(dec)==0)
+{
+delay(20);
+while(digitalRead(dec)==0);
+num=(user[p])-1;
+if(num<=0) num=0;
+if(num>=9) num=9;
+user[p]=num;
+lcd.setCursor(12+p,1);
+lcd.print(num);
+lcd.setCursor(12+p,1);
+}
+if(digitalRead(mov)==0)
+{
+delay(200);
+while(digitalRead(mov)==0);
+p++;
+num=0;
+if(p>=3) p=0;
+lcd.setCursor(12+p,1);
+}
+}
+}
+void check()
+{
+if(digitalRead(Set)==0)
+{
+delay(20);
+while(digitalRead(Set)==0);
+E++;
+lcd.cursor();
+lcd.setCursor(0, 0);
+lcd.print("ENTER THE NUMBER");
+lcd.setCursor(0, 1);
+lcd.print(" ");
+delay(20);
+set_key=1;
+p=0;
+enter_key=0;
+}
+if(digitalRead(ent)==0)
+45
+{
+delay(20);
+while(digitalRead(ent)==0);
+set_value=(user[0]*100)+(user[1]*10)+(user[2]*1);
+enter_key=1;
+lcd.clear();
+}
+}
+char card=0,good=0;
+unsigned char c1_rice=50,c1_sugar=50;
+unsigned char c2_rice=50,c2_sugar=50;
+unsigned char c3_rice=50,c3_sugar=50;
+void timer()
+{
+unsigned char count=0,count1=0,one=0,two=0;
+count1=set_value*3;
+while(count<count1)
+{
+mydecimal(count1-count,13,1);
+if(good==1)
+{
+if(one==0)
+{
+46
+one=1;
+digitalWrite(relay1, LOW);
+digitalWrite(relay2, HIGH);
+delay(1000);
+digitalWrite(relay1, HIGH);
+digitalWrite(relay2, HIGH);
+}
+}
+else if(good==2)
+{
+if(two==0)
+{
+two=1;
+digitalWrite(relay3, LOW);
+digitalWrite(relay4, HIGH);
+delay(1000);
+digitalWrite(relay3, HIGH);
+digitalWrite(relay4, HIGH);
+}
+}
+count++;
+delay(600);
+}
+47
+digitalWrite(relay1, HIGH);
+digitalWrite(relay2, LOW);
+digitalWrite(relay3, HIGH);
+digitalWrite(relay4, LOW);
+delay(1000);
+digitalWrite(relay1, HIGH);
+digitalWrite(relay2, HIGH);
+digitalWrite(relay3, HIGH);
+digitalWrite(relay4, HIGH);
+}
+void call()
+{
+char looping=0;
+while(looping==0)
+{
+if(enter_key==1)
+{
+lcd.setCursor(0, 0);
+lcd.print("NEEDED: Kg");
+mydecimal(set_value,7,0);
+if(good==1)
+{
+if(card==1)
+48
+{
+if(set_value>c1_rice)
+{
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+}
+else
+{
+timer();
+looping=1;
+} }
+else if(card==2)
+{
+if(set_value>c2_rice)
+{
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+49
+}
+else
+{
+timer();
+looping=1;
+}
+}
+else if(card==3)
+{
+if(set_value>c3_rice)
+{
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+}
+else
+{
+timer();
+looping=1;
+}
+}
+50
+}
+else if(good==2)
+{
+if(card==1)
+{
+if(set_value>c1_sugar)
+{
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+}
+else
+{
+timer();
+looping=1;
+}
+}
+else if(card==2)
+{
+if(set_value>c2_sugar)
+{
+51
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+}
+else
+{
+timer();
+looping=1;
+}
+}
+else if(card==3)
+{
+if(set_value>c3_sugar)
+{
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" INSUFFICIENT ");
+delay(1000);
+looping=1;
+}
+else
+52
+{
+timer();
+looping=1;
+}
+}
+}
+}
+else
+{
+scan();
+check();
+}
+}
+enter_key=0;
+p=0;
+}
+void rfid()
+{
+if(index>=10)
+{
+int j;
+for(j=0;j<10;j++)
+{
+53
+lcd.setCursor(0+j, 1);
+lcd.write(rec[j]);
+}
+if( (strncmp(rec,card1,10)) == 0)
+{
+card=1;
+lcd.setCursor(11, 1);
+lcd.print("KAMAL ");
+delay(1000);
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print("1.RICE 2.SUGAR");
+while(digitalRead(inc) && digitalRead(dec)) ;
+if(digitalRead(inc)==0) good=1;
+else if(digitalRead(dec)==0) good=2;
+lcd.clear();
+if(good==1)
+{
+lcd.setCursor(0, 0);
+lcd.print("AVAIL RICE :");
+mydecimal(c1_rice,12,0);
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+54
+delay(1000);
+call();
+if(set_value<=c1_rice) c1_rice-=set_value;
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+}
+else if(good==2)
+{
+lcd.setCursor(0, 0);
+lcd.print("AVAIL SUGAR:");
+mydecimal(c1_sugar,12,0);
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+delay(1000);
+call();
+if(set_value<=c1_sugar) c1_sugar-=set_value;
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+}
+Serial.print("*1");
+55
+Lcd8_Decimal3(set_value);
+Lcd8_Decimal3(c1_rice);
+Lcd8_Decimal3(c1_sugar);
+Serial.write('\r');
+}
+else if( (strncmp(rec,card2,10)) == 0)
+{
+card=2;
+lcd.setCursor(11, 1);
+lcd.print(" GURU ");
+delay(1000);
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print("1.RICE 2.SUGAR");
+while(digitalRead(inc) && digitalRead(dec)) ;
+if(digitalRead(inc)==0) good=1;
+else if(digitalRead(dec)==0) good=2;
+lcd.clear();
+if(good==1)
+{
+lcd.setCursor(0, 0);
+lcd.print("AVAIL RICE :");
+mydecimal(c2_rice,12,0);
+56
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+delay(1000);
+call();
+if(set_value<=c2_rice) c2_rice-=set_value;
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+}
+else if(good==2)
+{
+lcd.setCursor(0, 0);
+lcd.print("AVAIL SUGAR:");
+mydecimal(c2_sugar,12,0);
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+delay(1000);
+call();
+if(set_value<=c2_sugar) c2_sugar-=set_value;
+lcd.clear();
+lcd.setCursor(0, 0);
+57
+lcd.print(" SHOW YOUR CARD ");
+}
+Serial.print("*2");
+Lcd8_Decimal3(set_value);
+Lcd8_Decimal3(c2_rice);
+Lcd8_Decimal3(c2_sugar);
+Serial.write('\r');
+}
+else if( (strncmp(rec,card3,10)) == 0)
+{
+card=3;
+lcd.setCursor(11, 1);
+lcd.print(" RAJA ");
+delay(1000);
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print("1.RICE 2.SUGAR");
+while(digitalRead(inc) && digitalRead(dec)) ;
+if(digitalRead(inc)==0) good=1;
+else if(digitalRead(dec)==0) good=2;
+lcd.clear();
+if(good==1)
+{
+58
+lcd.setCursor(0, 0);
+lcd.print("AVAIL RICE :");
+mydecimal(c3_rice,12,0);
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+delay(1000);
+call();
+if(set_value<=c3_rice) c3_rice-=set_value;
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+}
+else if(good==2)
+{
+lcd.setCursor(0, 0);
+lcd.print("AVAIL SUGAR:");
+mydecimal(c3_sugar,12,0);
+lcd.setCursor(0, 1);
+lcd.print("SELECT Kg :");
+delay(1000);
+call();
+if(set_value<=c3_sugar) c3_sugar-=set_value;
+59
+lcd.clear();
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+}
+Serial.print("*3");
+Lcd8_Decimal3(set_value);
+Lcd8_Decimal3(c3_rice);
+Lcd8_Decimal3(c3_sugar);
+Serial.write('\r');
+}
+index=0;
+}
+}
+void setup()
+{
+pinMode(relay1, OUTPUT);
+pinMode(relay2, OUTPUT);
+pinMode(relay3, OUTPUT);
+pinMode(relay4, OUTPUT);
+digitalWrite(relay1, HIGH);
+digitalWrite(relay2, HIGH);
+digitalWrite(relay3, HIGH);
+60
+digitalWrite(relay4, HIGH);
+pinMode(Set,INPUT_PULLUP);
+pinMode(mov,INPUT_PULLUP);
+pinMode(inc,INPUT_PULLUP);
+pinMode(dec,INPUT_PULLUP);
+pinMode(ent,INPUT_PULLUP);
+lcd.begin(16, 2);
+lcd.setCursor(0, 0);
+lcd.print(" SHOW YOUR CARD ");
+lcd.setCursor(0, 1);
+lcd.print(" ");
+Serial.begin(9600); // start serial for output
+Serial.println("WORKING FINE");
+}
+void loop()
+{
+rfid();
+}
+void serialEvent()
+{
+if(Serial.available())
+{
+rec[index++]=(char)Serial.read();}}
